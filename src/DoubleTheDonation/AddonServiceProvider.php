@@ -4,8 +4,6 @@ namespace GiveDoubleTheDonation\DoubleTheDonation;
 use Give\Helpers\Hooks;
 use Give\ServiceProviders\ServiceProvider;
 
-use GiveDoubleTheDonation\DoubleTheDonation\Helpers\SettingsPage;
-use GiveDoubleTheDonation\DoubleTheDonation\SettingsPage as AddonSettingsPage;
 use GiveDoubleTheDonation\Addon\Activation;
 use GiveDoubleTheDonation\Addon\License;
 use GiveDoubleTheDonation\Addon\Language;
@@ -54,40 +52,14 @@ class AddonServiceProvider implements ServiceProvider {
 	 * @return void
 	 */
 	private function loadBackend() {
-		// Register settings page
-		SettingsPage::registerPage( AddonSettingsPage::class );
 
 		Hooks::addAction( 'admin_init', License::class, 'check' );
 		Hooks::addAction( 'admin_init', ActivationBanner::class, 'show' );
 		// Load backend assets.
 		Hooks::addAction( 'admin_enqueue_scripts', Assets::class, 'loadBackendAssets' );
 
-		// Add new settings page section.
-		SettingsPage::addPageSection( 'general', 'double-the-donation', 'Double the Donation' );
-
-		// Add page settings.
-		SettingsPage::addSettings(
-			'general',
-			'double-the-donation',
-			[
-				[
-					'name' => esc_html__( '', 'give-double-the-donation' ),
-					'desc' => '',
-					'id'   => 'dtd_title',
-					'type' => 'title',
-				],
-				[
-					'name' => esc_html__( 'Public API Key', 'give-double-the-donation' ),
-					'desc' => esc_html__( 'Please enter the PUBLIC API key from Double the Donation.', 'give-double-the-donation' ),
-					'id'   => 'public_dtd_key',
-					'type' => 'api_key',
-				],
-				[
-					'id'   => 'text_field_setting',
-					'type' => 'sectionend',
-				],
-			]
-		);
+		// Add settings tab.
+		Give(SettingsTab::class)->addTab();
 
 	}
 
