@@ -36,6 +36,8 @@
         "@prettier/plugin-php": "^0.14.3",
         "@wordpress/babel-plugin-import-jsx-pragma": "^2.7.0",
         "@wordpress/eslint-plugin": "^7.2.0",
+        "browser-sync": "^2.26.12",
+        "browser-sync-webpack-plugin": "^2.0.1",
         "cross-env": "^7.0.2",
         "cssnano": "^4.1.10",
         "eslint": "^7.8.1",
