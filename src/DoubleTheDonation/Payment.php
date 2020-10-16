@@ -27,6 +27,13 @@ class Payment {
 		give_update_meta( $payment_id, 'doublethedonation_company_name', $company_name );
 		give_update_meta( $payment_id, 'doublethedonation_entered_text', $company_entered_text );
 
+		// Update our core "Company Name" field.
+		give_update_meta( $payment_id, '_give_donation_company', $company_name );
+
+		if ( isset( $payment_data['user_info']['donor_id'] ) ) {
+			Give()->donor_meta->update_meta( absint( $payment_data['user_info']['donor_id'] ), '_give_donor_company', $company_name );
+		}
+
 	}
 
 	/**
@@ -78,10 +85,6 @@ class Payment {
 		);
 
 		$response_body = json_decode( wp_remote_retrieve_body( $response ) );
-
-		error_log( print_r( $data_360, true ) . "\n", 3, WP_CONTENT_DIR . '/debug_new.log' );
-		error_log( print_r( $response, true ) . "\n", 3, WP_CONTENT_DIR . '/debug_new.log' );
-		error_log( print_r( $response_body, true ) . "\n", 3, WP_CONTENT_DIR . '/debug_new.log' );
 
 		// API fail check.
 		if ( 201 !== wp_remote_retrieve_response_code( $response ) ) {
