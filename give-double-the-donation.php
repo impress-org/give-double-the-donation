@@ -5,9 +5,9 @@ use GiveDoubleTheDonation\Addon\Environment;
 use GiveDoubleTheDonation\DoubleTheDonation\AddonServiceProvider;
 
 /**
- * Plugin Name: Give - Double-the-Donation
- * Plugin URI:  https://givewp.com/addons/BOILERPLATE/
- * Description: Easily integrate with the Double-the-Donation employer matching platform.
+ * Plugin Name: Give - Double the Donation
+ * Plugin URI:  https://givewp.com/addons/give-double-the-donation/
+ * Description: Easily integrate with the Double the Donation employer matching platform.
  * Version:     1.0.0
  * Author:      GiveWP
  * Author URI:  https://givewp.com/
@@ -17,7 +17,7 @@ use GiveDoubleTheDonation\DoubleTheDonation\AddonServiceProvider;
 defined( 'ABSPATH' ) or exit;
 
 // Add-on name
-define( 'GIVE_DTD_NAME', 'Give - Double-the-Donation' );
+define( 'GIVE_DTD_NAME', 'Give - Double the Donation Integration' );
 
 // Versions
 define( 'GIVE_DTD_VERSION', '1.0.0' );

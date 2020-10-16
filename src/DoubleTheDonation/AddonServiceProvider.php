@@ -31,6 +31,15 @@ class AddonServiceProvider implements ServiceProvider {
 	public function boot() {
 		// Load add-on translations.
 		Hooks::addAction( 'init', Language::class, 'load' );
+		Hooks::addAction( 'give_donation_form_user_info', DonationForm::class, 'employerMatchField' );
+		Hooks::addAction( 'give_insert_payment', Payment::class, 'addPaymentMeta', 10, 2  );
+
+		// Legacy form hook.
+		Hooks::addAction( 'give_payment_receipt_before_table', Payment::class, 'appendDTD' );
+		// New Template hook.
+		Hooks::addAction( 'give_new_receipt', Payment::class, 'appendDTD'  );
+
+		Hooks::addFilter( 'give_metabox_form_data_settings', SettingsDonationForm::class, 'addSettings' );
 
 		is_admin()
 			? $this->loadBackend()
@@ -52,26 +61,34 @@ class AddonServiceProvider implements ServiceProvider {
 		Hooks::addAction( 'admin_init', ActivationBanner::class, 'show' );
 		// Load backend assets.
 		Hooks::addAction( 'admin_enqueue_scripts', Assets::class, 'loadBackendAssets' );
-		/**
-		 * Example of how to extend an existing settings page.
-		 */
-		// Remove settings page section.
-		SettingsPage::removePageSection( 'general', 'access-control' );
+
 		// Add new settings page section.
-		SettingsPage::addPageSection( 'general', 'new-section', 'New Access Control Section' );
+		SettingsPage::addPageSection( 'general', 'double-the-donation', 'Double the Donation' );
+
 		// Add page settings.
 		SettingsPage::addSettings(
 			'general',
-			'new-section',
+			'double-the-donation',
 			[
 				[
-					'name' => __( 'Custom Setting Field', 'give-double-the-donation' ),
-					'id'   => 'custom_setting_field',
-					'desc' => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ', 'give-double-the-donation' ),
-					'type' => 'text',
+					'name' => esc_html__( '', 'give-double-the-donation' ),
+					'desc' => '',
+					'id'   => 'dtd_title',
+					'type' => 'title',
+				],
+				[
+					'name' => esc_html__( 'Public API Key', 'give-double-the-donation' ),
+					'desc' => esc_html__( 'Please enter the PUBLIC API key from Double the Donation.', 'give-double-the-donation' ),
+					'id'   => 'public_dtd_key',
+					'type' => 'api_key',
+				],
+				[
+					'id'   => 'text_field_setting',
+					'type' => 'sectionend',
 				],
 			]
 		);
+
 	}
 
 	/**
