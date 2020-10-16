@@ -12,7 +12,7 @@ class Payment {
 	 *
 	 * @return bool
 	 */
-	function addPaymentMeta( $payment_id, $payment_data ) {
+	public function addPaymentMeta( $payment_id, $payment_data ) {
 
 		$company_id = isset( $_POST['doublethedonation_company_id'] ) ? give_clean( $_POST['doublethedonation_company_id'] ) : '';
 		if ( ! $company_id ) {
@@ -43,7 +43,7 @@ class Payment {
 	 *
 	 * @return bool
 	 */
-	function appendDTD( $payment ) {
+	public function appendDTD( $payment ) {
 
 		// API Key check
 		$dtd_api_key = give_get_option( 'public_dtd_key', false );
