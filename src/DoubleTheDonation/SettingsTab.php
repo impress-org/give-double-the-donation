@@ -27,7 +27,13 @@ class SettingsTab  {
 					'type' => 'api_key',
 				],
 				[
-					'id'   => 'text_field_setting',
+					'name' => esc_html__( 'Private API Key', 'give-double-the-donation' ),
+					'desc' => esc_html__( 'Please enter the PRIVATE API key from Double the Donation.', 'give-double-the-donation' ),
+					'id'   => 'public_dtd_key',
+					'type' => 'api_key',
+				],
+				[
+					'id'   => 'dtd_setting',
 					'type' => 'sectionend',
 				],
 			]
