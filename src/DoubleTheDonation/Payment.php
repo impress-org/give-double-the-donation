@@ -67,7 +67,6 @@ class Payment {
 			'donor_email'                    => $payment_meta['email'],
 			'campaign'                       => $payment_meta['form_id'],
 			'donation_amount'                => give_donation_amount( $donation_id ),
-			// TODO: API docs says optional for donation_identifier but API response errors and requires it to be passed.
 			'donation_identifier'            => Give()->seq_donation_number->get_serial_code( $donation_id ),
 			'doublethedonation_company_id'   => $payment_meta['doublethedonation_company_id'],
 			'doublethedonation_entered_text' => $payment_meta['doublethedonation_entered_text'],
@@ -102,22 +101,6 @@ class Payment {
 		$note = esc_html__( 'Donation information added to Double the Donation 360MatchPro', 'give-double-the-donation' );
 		give_insert_payment_note( $payment->ID, $note );
 
-		// TODO: Ask DTD about this code below because I didn't notice any responses coming for esign urls that was reliable.
-
-		//		$esign_url = esc_url( $response_body->esign_url );
-		//
-		//		ob_start(); ?>
-		<!---->
-		<!--		--><?php //if ( $esign_url ) : ?>
-		<!--			<script>doublethedonation.plugin.set_docusign_envelope_url( resp.esign_url, 'Your donation is eligible for a matching gift. Please click here to fill out the form!' );</script>-->
-		<!--		--><?php //endif; ?>
-		<!---->
-		<!--		<input type="hidden" id="dtd-company-id" value="--><?php //echo $payment_meta['_give_dtd_company_id']; ?><!--" />-->
-		<!--		<input type="hidden" id="dtd-donation-identifier" value="--><?php //echo $payment_meta['key']; ?><!--" />-->
-		<!--		<input type="hidden" id="dtd-email" value="--><?php //echo $payment_meta['_give_payment_donor_email']; ?><!--" />-->
-		<!--		<input type="hidden" id="dtd-page-id" value="--><?php //echo $payment_meta['_give_dtd_page_id']; ?><!--" />-->
-		<!---->
-		<!--		--><?php //return ob_get_clean();
 	}
 
 
