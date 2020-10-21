@@ -15,10 +15,14 @@ class SettingsTab  {
 			'double-the-donation',
 			[
 				[
-					'name' => esc_html__( '', 'give-double-the-donation' ),
-					'desc' => '',
+					'name' => '',
 					'id'   => 'dtd_title',
 					'type' => 'title',
+				],
+				[
+					'name' => '',
+					'id'   => 'dtd_intro',
+					'type' => 'dtd_intro',
 				],
 				[
 					'name' => esc_html__( 'Public API Key', 'give-double-the-donation' ),
@@ -33,12 +37,33 @@ class SettingsTab  {
 					'type' => 'api_key',
 				],
 				[
+					'name'  => esc_html__( 'Documentation', 'give' ),
+					'id'    => 'dtd_docs_link',
+					'url'   => esc_url( 'http://docs.givewp.com/double-the-donation' ),
+					'title' => esc_html__( 'Documentation', 'give' ),
+					'type'  => 'give_docs_link',
+				],
+				[
 					'id'   => 'dtd_setting',
 					'type' => 'sectionend',
 				],
 			]
 		);
 	}
+
+	public function renderIntro(){ ?>
+
+		<div style="max-width: 600px; margin: 20px 0 25px;">
+			<img src="<?php echo GIVE_DTD_URL . '/public/images/dtd-logo.png'; ?>" width="400" />
+
+			<p>Seamlessly integrate the <a href="https://doublethedonation.com" target="_blank">Double the Donation</a> database of corporate matching gift and volunteer grant
+				programs with
+				your
+				GiveWP donation forms. Don't have an account with Double the Donation yet? <a href="https://zfrmz.com/Pzf5wLSqsWfEoiqGLl1q" target="_blank">Click here to get
+					started!</a></p>
+		</div>
+
+	<?php }
 
 	/**
 	 * Add Settings Link tab to plugin row.

@@ -60,6 +60,9 @@ class AddonServiceProvider implements ServiceProvider {
 
 		Hooks::addFilter('plugin_action_links_' . GIVE_DTD_BASENAME, SettingsTab::class, 'addSettingsLink' );
 
+		// Will display html of the import donation.
+		Hooks::addAction('give_admin_field_dtd_intro',SettingsTab::class, 'renderIntro');
+
 		// Add settings tab.
 		Give(SettingsTab::class)->addTab();
 
