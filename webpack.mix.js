@@ -12,7 +12,12 @@ mix
 
 	// public assets
 	.js( 'src/DoubleTheDonation/resources/js/frontend/give-double-the-donation.js', 'public/js/' )
-	.sass( 'src/DoubleTheDonation/resources/css/frontend/give-double-the-donation-frontend.scss', 'public/css' );
+	.sass( 'src/DoubleTheDonation/resources/css/frontend/give-double-the-donation-frontend.scss', 'public/css' )
+
+	// images
+	.copy( 'src/DoubleTheDonation/resources/images/*.{jpg,jpeg,png,gif}', 'public/images' );
+
+
 
 mix.webpackConfig( {
 	externals: {
