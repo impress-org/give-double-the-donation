@@ -40,4 +40,23 @@ class SettingsTab  {
 		);
 	}
 
+	/**
+	 * Add Settings Link tab to plugin row.
+	 *
+	 * @param $actions
+	 *
+	 * @return array
+	 */
+	public function addSettingsLink( $actions ) {
+		$new_actions = array(
+			'settings' => sprintf(
+				'<a href="%1$s">%2$s</a>',
+				admin_url( 'edit.php?post_type=give_forms&page=give-settings&tab=general&section=double-the-donation' ),
+				__( 'Settings', 'give-double-the-donation' )
+			),
+		);
+
+		return array_merge( $new_actions, $actions );
+	}
+
 }

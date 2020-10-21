@@ -58,6 +58,8 @@ class AddonServiceProvider implements ServiceProvider {
 		// Load backend assets.
 		Hooks::addAction( 'admin_enqueue_scripts', Assets::class, 'loadBackendAssets' );
 
+		Hooks::addFilter('plugin_action_links_' . GIVE_DTD_BASENAME, SettingsTab::class, 'addSettingsLink' );
+
 		// Add settings tab.
 		Give(SettingsTab::class)->addTab();
 
