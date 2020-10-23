@@ -1,12 +1,12 @@
 <?php
 
-
 namespace GiveDoubleTheDonation\DoubleTheDonation;
-
 
 class Payment {
 
 	/**
+	 * Adds payment meta which sets GiveWP employer fields and saves other API responses from DTD.
+	 *
 	 * @param $payment_id
 	 * @param $payment_data
 	 *
@@ -14,65 +14,68 @@ class Payment {
 	 */
 	public function addPaymentMeta( $payment_id, $payment_data ) {
 
-		$company_id = isset( $_POST['doublethedonation_company_id'] ) ? give_clean( $_POST['doublethedonation_company_id'] ) : '';
-		if ( ! $company_id ) {
+		$companyID = isset( $_POST['doublethedonation_company_id'] ) ? give_clean( $_POST['doublethedonation_company_id'] ) : '';
+		if ( ! $companyID ) {
 			return false;
 		}
 
-		$company_id           = isset( $_POST['doublethedonation_company_id'] ) ? give_clean( $_POST['doublethedonation_company_id'] ) : '';
-		$company_name         = isset( $_POST['doublethedonation_company_name'] ) ? give_clean( $_POST['doublethedonation_company_name'] ) : '';
-		$company_entered_text = isset( $_POST['doublethedonation_entered_text'] ) ? give_clean( $_POST['doublethedonation_entered_text'] ) : '';
+		$companyName         = isset( $_POST['doublethedonation_company_name'] ) ? give_clean( $_POST['doublethedonation_company_name'] ) : '';
+		$companyEnteredText = isset( $_POST['doublethedonation_entered_text'] ) ? give_clean( $_POST['doublethedonation_entered_text'] ) : '';
 
-		give_update_meta( $payment_id, 'doublethedonation_company_id', $company_id );
-		give_update_meta( $payment_id, 'doublethedonation_company_name', $company_name );
-		give_update_meta( $payment_id, 'doublethedonation_entered_text', $company_entered_text );
+		give_update_meta( $payment_id, 'doublethedonation_company_id', $companyID );
+		give_update_meta( $payment_id, 'doublethedonation_company_name', $companyName );
+		give_update_meta( $payment_id, 'doublethedonation_entered_text', $companyEnteredText );
 
 		// Update our core "Company Name" field.
-		give_update_meta( $payment_id, '_give_donation_company', $company_name );
+		give_update_meta( $payment_id, '_give_donation_company', $companyName );
 
 		if ( isset( $payment_data['user_info']['donor_id'] ) ) {
-			Give()->donor_meta->update_meta( absint( $payment_data['user_info']['donor_id'] ), '_give_donor_company', $company_name );
+			Give()->donor_meta->update_meta( absint( $payment_data['user_info']['donor_id'] ), '_give_donor_company', $companyName );
 		}
 
 	}
 
 	/**
-	 * Passes Donation and donor info to Double the Donation's API.
+	 * Adds the donation to DTD.
 	 *
-	 * @param $payment
+	 * @param $payment_id
+	 * @param $payment_data
 	 *
-	 * @return bool
+	 * @return false|mixed
 	 */
-	public function appendDTD( $payment ) {
+	public function addDonationToDTD( $payment_id, $payment_data ) {
 
 		// API Key check
-		$dtd_api_key = give_get_option( 'public_dtd_key', false );
-		if ( ! $dtd_api_key ) {
+		$dtdPublicKey = give_get_option( 'public_dtd_key', false );
+		if ( ! $dtdPublicKey ) {
 			return false;
 		}
 
-		// Compatibility with the new form template receipt and hooking in using `give_new_receipt`
-		if ( $payment->donationId ) {
-			$donation_id = $payment->donationId;
-		} else {
-			$donation_id = $payment->ID; // This is hooked in via `give_payment_receipt_before_table`
-		}
-
-		$payment_meta = give_get_payment_meta( $donation_id );
+		$paymentMeta = give_get_payment_meta( $payment_id );
 
 		$data_360 = [
-			'360matchpro_public_key'         => $dtd_api_key,
-			'donor_first_name'               => $payment_meta['user_info']['first_name'],
-			'donor_last_name'                => $payment_meta['user_info']['last_name'],
-			'donor_email'                    => $payment_meta['email'],
-			'campaign'                       => $payment_meta['form_id'],
-			'donation_amount'                => give_donation_amount( $donation_id ),
-			'donation_identifier'            => Give()->seq_donation_number->get_serial_code( $donation_id ),
-			'doublethedonation_company_id'   => $payment_meta['doublethedonation_company_id'],
-			'doublethedonation_entered_text' => $payment_meta['doublethedonation_entered_text'],
-			'partner_identifier'             => 'GiveWP',
+			'360matchpro_public_key' => $dtdPublicKey,
+			'donor_first_name'       => $paymentMeta['user_info']['first_name'],
+			'donor_last_name'        => $paymentMeta['user_info']['last_name'],
+			'donor_email'            => $paymentMeta['email'],
+			'campaign'               => $paymentMeta['form_id'],
+			'donation_amount'        => give_donation_amount( $payment_id ),
+			'donation_identifier'    => Give()->seq_donation_number->get_serial_code( $payment_id ),
+			'partner_identifier'     => 'GiveWP',
 		];
 
+		$companyID = isset( $paymentMeta['doublethedonation_company_id'] ) ? $paymentMeta['doublethedonation_company_id'] : '';
+		if ( $companyID ) {
+			$data_360['doublethedonation_company_id'] = $companyID;
+		}
+
+		$companyEnteredText = isset( $paymentMeta['doublethedonation_company_id'] ) ? $paymentMeta['doublethedonation_company_id'] : '';
+		if ( $companyEnteredText ) {
+			$data_360['doublethedonation_entered_text'] = $companyEnteredText;
+		}
+
+		// Pass donation data to DTD regardless of whether the donor put donor information
+		// this is requested by DTD because they have in their system matching processes for donation data.
 		$response = wp_remote_post( 'https://doublethedonation.com/api/360matchpro/v1/register_donation',
 			[
 				'method'   => 'POST',
@@ -83,13 +86,13 @@ class Payment {
 			]
 		);
 
-		$response_body = json_decode( wp_remote_retrieve_body( $response ) );
+		$responseBody = json_decode( wp_remote_retrieve_body( $response ) );
 
 		// API fail check.
 		if ( 201 !== wp_remote_retrieve_response_code( $response ) ) {
 			give()->logs->add(
 				'Double the Donation',
-				'The API failed during the register_donation process. Message from the API: ' . $response_body->error,
+				'The API failed during the register_donation process. Message from the API: ' . $responseBody->error,
 				0,
 				'api_request'
 			);
@@ -99,7 +102,11 @@ class Payment {
 
 		// Success! Add note for admin.
 		$note = esc_html__( 'Donation information added to Double the Donation 360MatchPro', 'give-double-the-donation' );
-		give_insert_payment_note( $payment->ID, $note );
+		give_insert_payment_note( $payment_id, $note );
+
+		$companyID = isset( $responseBody->{'matched-company'}->id ) ? $responseBody->{'matched-company'}->id : $companyID;
+
+		return $companyID;
 
 	}
 

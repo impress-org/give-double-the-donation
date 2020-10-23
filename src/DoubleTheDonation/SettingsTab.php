@@ -1,10 +1,12 @@
 <?php
+
 namespace GiveDoubleTheDonation\DoubleTheDonation;
+
 use GiveDoubleTheDonation\DoubleTheDonation\Helpers\SettingsPage as SettingsRegister;
 
-class SettingsTab  {
+class SettingsTab {
 
-	public function addTab(){
+	public function addTab() {
 
 		// Add new settings page section.
 		SettingsRegister::addPageSection( 'general', 'double-the-donation', 'Double the Donation' );
@@ -33,7 +35,7 @@ class SettingsTab  {
 				[
 					'name' => esc_html__( 'Private API Key', 'give-double-the-donation' ),
 					'desc' => esc_html__( 'Please enter the PRIVATE API key from Double the Donation.', 'give-double-the-donation' ),
-					'id'   => 'public_dtd_key',
+					'id'   => 'private_dtd_key',
 					'type' => 'api_key',
 				],
 				[
@@ -51,16 +53,14 @@ class SettingsTab  {
 		);
 	}
 
-	public function renderIntro(){ ?>
+	public function renderIntro() { ?>
 
 		<div style="max-width: 600px; margin: 20px 0 25px;">
 			<img src="<?php echo GIVE_DTD_URL . '/public/images/dtd-logo.png'; ?>" width="400" />
 
-			<p>Seamlessly integrate the <a href="https://doublethedonation.com" target="_blank">Double the Donation</a> database of corporate matching gift and volunteer grant
-				programs with
-				your
-				GiveWP donation forms. Don't have an account with Double the Donation yet? <a href="https://zfrmz.com/Pzf5wLSqsWfEoiqGLl1q" target="_blank">Click here to get
-					started!</a></p>
+			<p>Seamlessly integrate the
+				<a href="https://doublethedonation.com" target="_blank">Double the Donation</a> database of corporate matching gift and volunteer grant programs with your GiveWP donation forms. Don't have an account with Double the Donation yet?
+				<a href="https://zfrmz.com/Pzf5wLSqsWfEoiqGLl1q" target="_blank">Click here to get started!</a></p>
 		</div>
 
 	<?php }

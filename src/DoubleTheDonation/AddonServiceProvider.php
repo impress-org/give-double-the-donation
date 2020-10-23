@@ -30,12 +30,13 @@ class AddonServiceProvider implements ServiceProvider {
 		// Load add-on translations.
 		Hooks::addAction( 'init', Language::class, 'load' );
 		Hooks::addAction( 'give_donation_form_user_info', DonationForm::class, 'employerMatchField' );
-		Hooks::addAction( 'give_insert_payment', Payment::class, 'addPaymentMeta', 10, 2  );
 
-		// Legacy form hook.
-		Hooks::addAction( 'give_payment_receipt_before_table', Payment::class, 'appendDTD' );
-		// New Template hook.
-		Hooks::addAction( 'give_new_receipt', Payment::class, 'appendDTD'  );
+		Hooks::addAction( 'give_insert_payment', Payment::class, 'addPaymentMeta', 10, 2  );
+		Hooks::addAction( 'give_insert_payment', Payment::class, 'addDonationToDTD', 11, 2 );
+
+		// Show Receipt info
+		Hooks::addAction( 'give_payment_receipt_after', UpdateDonationReceipt::class, 'renderLegacyRow', 10, 2 );
+		Hooks::addAction( 'give_new_receipt', UpdateDonationReceipt::class, 'renderRowSequoiaTemplate' );
 
 		Hooks::addFilter( 'give_metabox_form_data_settings', SettingsDonationForm::class, 'addSettings' );
 
