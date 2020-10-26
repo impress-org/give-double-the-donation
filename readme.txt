@@ -6,7 +6,7 @@ Requires at least: 5.0
 Tested up to: 5.5
 Requires PHP: 5.6
 Stable tag: 1.0.0
-Requires Give: 2.8.0
+Requires Give: 2.9.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -40,5 +40,5 @@ Automatic updates should work like a charm; as always though, ensure you backup 
 
 == Changelog ==
 
-= 1.0.0: DATE =
+= 1.0.0: October 26th, 2020 =
 * Initial plugin release. Yippee!

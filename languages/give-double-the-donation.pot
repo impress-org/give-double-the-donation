@@ -15,22 +15,11 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/DoubleTheDonation/AddonServiceProvider.php:74
-msgstr ""
-
-#: src/DoubleTheDonation/AddonServiceProvider.php:80
-msgid "Public API Key"
-msgstr ""
-
-#: src/DoubleTheDonation/AddonServiceProvider.php:81
-msgid "Please enter the PUBLIC API key from Double the Donation."
-msgstr ""
-
 #: src/DoubleTheDonation/DonationForm.php:32, src/DoubleTheDonation/SettingsDonationForm.php:39
 msgid "See if your company will match your donation!"
 msgstr ""
 
-#: src/DoubleTheDonation/Payment.php:102
+#: src/DoubleTheDonation/Payment.php:104
 msgid "Donation information added to Double the Donation 360MatchPro"
 msgstr ""
 
@@ -66,8 +55,48 @@ msgstr ""
 msgid "Double the Donation Docs Link"
 msgstr ""
 
-#: src/DoubleTheDonation/SettingsPage.php:17
-msgid "Double the Donation "
+#: src/DoubleTheDonation/SettingsTab.php:30
+msgid "Public API Key"
+msgstr ""
+
+#: src/DoubleTheDonation/SettingsTab.php:31
+msgid "Please enter the PUBLIC API key from Double the Donation."
+msgstr ""
+
+#: src/DoubleTheDonation/SettingsTab.php:36
+msgid "Private API Key"
+msgstr ""
+
+#: src/DoubleTheDonation/SettingsTab.php:37
+msgid "Please enter the PRIVATE API key from Double the Donation."
+msgstr ""
+
+#: src/DoubleTheDonation/SettingsTab.php:80
+msgid "Settings"
+msgstr ""
+
+#: src/DoubleTheDonation/UpdateDonationReceipt.php:62
+msgid "Employer"
+msgstr ""
+
+#: src/DoubleTheDonation/UpdateDonationReceipt.php:63
+msgid "Unknown"
+msgstr ""
+
+#: src/DoubleTheDonation/UpdateDonationReceipt.php:74
+msgid "Employer Matching"
+msgstr ""
+
+#: src/DoubleTheDonation/UpdateDonationReceipt.php:138
+msgid "Finish the Match"
+msgstr ""
+
+#: src/DoubleTheDonation/UpdateDonationReceipt.php:145
+msgid "Match Guidelines"
+msgstr ""
+
+#: src/DoubleTheDonation/UpdateDonationReceipt.php:147
+msgid "Complete the Match"
 msgstr ""
 
 #: src/DoubleTheDonation/resources/views/admin/notices/give-inactive.php:5, src/DoubleTheDonation/resources/views/admin/notices/give-version-error.php:4
