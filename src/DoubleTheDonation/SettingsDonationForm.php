@@ -37,7 +37,7 @@ class SettingsDonationForm {
 						'give-double-the-donation' ),
 					'type'          => 'text',
 					'default'       => esc_html__( 'See if your company will match your donation!', 'give-double-the-donation' ),
-					'wrapper_class' => 'give-dtd-metabox-field',
+					'wrapper_class' => 'give-dtd-metabox-field give-hidden',
 				],
 				[
 					'name'  => esc_html__( 'Double the Donation Docs Link', 'give-double-the-donation' ),
