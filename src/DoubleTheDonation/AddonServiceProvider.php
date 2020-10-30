@@ -1,4 +1,5 @@
 <?php
+
 namespace GiveDoubleTheDonation\DoubleTheDonation;
 
 use Give\Helpers\Hooks;
@@ -9,8 +10,7 @@ use GiveDoubleTheDonation\Addon\License;
 use GiveDoubleTheDonation\Addon\Language;
 use GiveDoubleTheDonation\Addon\ActivationBanner;
 
-use GiveDoubleTheDonation\DoubleTheDonation\Helpers\SettingsPage;
-use GiveDoubleTheDonation\DoubleTheDonation\SettingsPage as DoubleTheDonationSettingsPage;
+use GiveDoubleTheDonation\DoubleTheDonation\Helpers\SettingsPage as SettingsPageRegister;
 
 /**
  * Example of a service provider responsible for add-on initialization.
@@ -24,6 +24,7 @@ class AddonServiceProvider implements ServiceProvider {
 	 */
 	public function register() {
 		give()->singleton( Activation::class );
+		give()->singleton( SettingsPageContent::class );
 	}
 
 	/**
@@ -34,7 +35,7 @@ class AddonServiceProvider implements ServiceProvider {
 		Hooks::addAction( 'init', Language::class, 'load' );
 		Hooks::addAction( 'give_donation_form_user_info', DonationForm::class, 'employerMatchField' );
 
-		Hooks::addAction( 'give_insert_payment', Payment::class, 'addPaymentMeta', 10, 2  );
+		Hooks::addAction( 'give_insert_payment', Payment::class, 'addPaymentMeta', 10, 2 );
 		Hooks::addAction( 'give_insert_payment', Payment::class, 'addDonationToDTD', 11, 2 );
 
 		// Show Receipt info
@@ -63,11 +64,12 @@ class AddonServiceProvider implements ServiceProvider {
 		Hooks::addAction( 'admin_enqueue_scripts', Assets::class, 'loadBackendAssets' );
 
 		// Register settings page
-		SettingsPage::registerPage( DoubleTheDonationSettingsPage::class );
+		SettingsPageRegister::registerPage( SettingsPage::class );
 
+		Hooks::addFilter( 'plugin_action_links_' . GIVE_DTD_BASENAME, SettingsPageContent::class, 'addSettingsLink' );
 
-		add_filter('plugin_action_links_' . GIVE_DTD_BASENAME, [$this, 'addSettingsLink']);
-		add_action('give_admin_field_dtd_intro', [$this, 'renderIntro']);
+		// Will display html of the import donation.
+		Hooks::addAction( 'give_admin_field_dtd_intro', SettingsPageContent::class, 'renderIntro' );
 	}
 
 	/**
@@ -80,41 +82,4 @@ class AddonServiceProvider implements ServiceProvider {
 		// Load front-end assets.
 		Hooks::addAction( 'wp_enqueue_scripts', Assets::class, 'loadFrontendAssets' );
 	}
-
-	/**
-	 * Add Settings Link tab to plugin row.
-	 *
-	 * @param $actions
-	 * @since 1.0.0
-	 * @return array
-	 */
-	public function addSettingsLink( $actions ) {
-		$new_actions = array(
-			'settings' => sprintf(
-				'<a href="%1$s">%2$s</a>',
-				admin_url( 'edit.php?post_type=give_forms&page=give-settings&tab=general&section=double-the-donation' ),
-				__( 'Settings', 'give-double-the-donation' )
-			),
-		);
-
-		return array_merge( $new_actions, $actions );
-	}
-
-	/**
-	 * Render intro
-	 *
-	 * @since 1.0.0
-	 * @return void
-	 */
-    public function renderIntro() { ?>
-
-		<div style="max-width: 600px; margin: 20px 0 25px;">
-			<img src="<?php echo GIVE_DTD_URL . '/public/images/dtd-logo.png'; ?>" width="400" />
-
-			<p>Seamlessly integrate the
-				<a href="https://doublethedonation.com" target="_blank">Double the Donation</a> database of corporate matching gift and volunteer grant programs with your GiveWP donation forms. Don't have an account with Double the Donation yet?
-				<a href="http://docs.givewp.com/dtd-get-started" target="_blank">Click here to get started!</a></p>
-		</div>
-
-    <?php }
 }
