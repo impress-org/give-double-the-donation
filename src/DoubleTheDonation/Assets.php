@@ -16,7 +16,13 @@ class Assets {
 	 * @return void
 	 */
 	public static function loadBackendAssets() {
-
+		wp_enqueue_script(
+			'give-double-the-donation-script-backend',
+			GIVE_DTD_URL . 'public/js/give-double-the-donation-admin.js',
+			[],
+			GIVE_DTD_VERSION,
+			true
+		);
 	}
 
 	/**
