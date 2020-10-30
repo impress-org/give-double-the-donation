@@ -6,4 +6,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+-   Double the Donation settings have been reviewed (#6)
 -   DtD form setting is now hidden until enabled (#7)

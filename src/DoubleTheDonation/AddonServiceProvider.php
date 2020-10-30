@@ -1,4 +1,5 @@
 <?php
+
 namespace GiveDoubleTheDonation\DoubleTheDonation;
 
 use Give\Helpers\Hooks;
@@ -8,6 +9,8 @@ use GiveDoubleTheDonation\Addon\Activation;
 use GiveDoubleTheDonation\Addon\License;
 use GiveDoubleTheDonation\Addon\Language;
 use GiveDoubleTheDonation\Addon\ActivationBanner;
+
+use GiveDoubleTheDonation\DoubleTheDonation\Helpers\SettingsPage as SettingsPageRegister;
 
 /**
  * Example of a service provider responsible for add-on initialization.
@@ -21,6 +24,7 @@ class AddonServiceProvider implements ServiceProvider {
 	 */
 	public function register() {
 		give()->singleton( Activation::class );
+		give()->singleton( SettingsPageContent::class );
 	}
 
 	/**
@@ -31,7 +35,7 @@ class AddonServiceProvider implements ServiceProvider {
 		Hooks::addAction( 'init', Language::class, 'load' );
 		Hooks::addAction( 'give_donation_form_user_info', DonationForm::class, 'employerMatchField' );
 
-		Hooks::addAction( 'give_insert_payment', Payment::class, 'addPaymentMeta', 10, 2  );
+		Hooks::addAction( 'give_insert_payment', Payment::class, 'addPaymentMeta', 10, 2 );
 		Hooks::addAction( 'give_insert_payment', Payment::class, 'addDonationToDTD', 11, 2 );
 
 		// Show Receipt info
@@ -59,14 +63,13 @@ class AddonServiceProvider implements ServiceProvider {
 		// Load backend assets.
 		Hooks::addAction( 'admin_enqueue_scripts', Assets::class, 'loadBackendAssets' );
 
-		Hooks::addFilter('plugin_action_links_' . GIVE_DTD_BASENAME, SettingsTab::class, 'addSettingsLink' );
+		// Register settings page
+		SettingsPageRegister::registerPage( SettingsPage::class );
+
+		Hooks::addFilter( 'plugin_action_links_' . GIVE_DTD_BASENAME, SettingsPageContent::class, 'addSettingsLink' );
 
 		// Will display html of the import donation.
-		Hooks::addAction('give_admin_field_dtd_intro',SettingsTab::class, 'renderIntro');
-
-		// Add settings tab.
-		Give(SettingsTab::class)->addTab();
-
+		Hooks::addAction( 'give_admin_field_dtd_intro', SettingsPageContent::class, 'renderIntro' );
 	}
 
 	/**
