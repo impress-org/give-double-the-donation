@@ -9,6 +9,9 @@ use GiveDoubleTheDonation\Addon\License;
 use GiveDoubleTheDonation\Addon\Language;
 use GiveDoubleTheDonation\Addon\ActivationBanner;
 
+use GiveDoubleTheDonation\DoubleTheDonation\Helpers\SettingsPage;
+use GiveDoubleTheDonation\DoubleTheDonation\SettingsPage as DoubleTheDonationSettingsPage;
+
 /**
  * Example of a service provider responsible for add-on initialization.
  *
@@ -59,13 +62,13 @@ class AddonServiceProvider implements ServiceProvider {
 		// Load backend assets.
 		Hooks::addAction( 'admin_enqueue_scripts', Assets::class, 'loadBackendAssets' );
 
-		Hooks::addFilter('plugin_action_links_' . GIVE_DTD_BASENAME, SettingsTab::class, 'addSettingsLink' );
+		// Register settings page
+		SettingsPage::registerPage( DoubleTheDonationSettingsPage::class );
+
+		//Hooks::addFilter('plugin_action_links_' . GIVE_DTD_BASENAME, DoubleTheDonationSettingsPage::class, 'add_settings_link' );
 
 		// Will display html of the import donation.
-		Hooks::addAction('give_admin_field_dtd_intro',SettingsTab::class, 'renderIntro');
-
-		// Add settings tab.
-		Give(SettingsTab::class)->addTab();
+		//Hooks::addAction('give_admin_field_dtd_intro',DoubleTheDonationSettingsPage::class, 'render_intro');
 
 	}
 
