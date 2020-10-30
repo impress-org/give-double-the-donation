@@ -65,11 +65,9 @@ class AddonServiceProvider implements ServiceProvider {
 		// Register settings page
 		SettingsPage::registerPage( DoubleTheDonationSettingsPage::class );
 
-		Hooks::addFilter('plugin_action_links_' . GIVE_DTD_BASENAME, AddonServiceProvider::class, 'addSettingsLink' );
 
-		// Will display html of the import donation.
-		Hooks::addAction('give_admin_field_dtd_intro',AddonServiceProvider::class, 'renderIntro');
-
+		add_filter('plugin_action_links_' . GIVE_DTD_BASENAME, [$this, 'addSettingsLink']);
+		add_action('give_admin_field_dtd_intro', [$this, 'renderIntro']);
 	}
 
 	/**
