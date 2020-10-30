@@ -65,10 +65,10 @@ class AddonServiceProvider implements ServiceProvider {
 		// Register settings page
 		SettingsPage::registerPage( DoubleTheDonationSettingsPage::class );
 
-		//Hooks::addFilter('plugin_action_links_' . GIVE_DTD_BASENAME, DoubleTheDonationSettingsPage::class, 'add_settings_link' );
+		Hooks::addFilter('plugin_action_links_' . GIVE_DTD_BASENAME, AddonServiceProvider::class, 'addSettingsLink' );
 
 		// Will display html of the import donation.
-		//Hooks::addAction('give_admin_field_dtd_intro',DoubleTheDonationSettingsPage::class, 'render_intro');
+		Hooks::addAction('give_admin_field_dtd_intro',AddonServiceProvider::class, 'renderIntro');
 
 	}
 
@@ -82,4 +82,41 @@ class AddonServiceProvider implements ServiceProvider {
 		// Load front-end assets.
 		Hooks::addAction( 'wp_enqueue_scripts', Assets::class, 'loadFrontendAssets' );
 	}
+
+	/**
+	 * Add Settings Link tab to plugin row.
+	 *
+	 * @param $actions
+	 * @since 1.0.0
+	 * @return array
+	 */
+	public function addSettingsLink( $actions ) {
+		$new_actions = array(
+			'settings' => sprintf(
+				'<a href="%1$s">%2$s</a>',
+				admin_url( 'edit.php?post_type=give_forms&page=give-settings&tab=general&section=double-the-donation' ),
+				__( 'Settings', 'give-double-the-donation' )
+			),
+		);
+
+		return array_merge( $new_actions, $actions );
+	}
+
+	/**
+	 * Render intro
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+    public function renderIntro() { ?>
+
+		<div style="max-width: 600px; margin: 20px 0 25px;">
+			<img src="<?php echo GIVE_DTD_URL . '/public/images/dtd-logo.png'; ?>" width="400" />
+
+			<p>Seamlessly integrate the
+				<a href="https://doublethedonation.com" target="_blank">Double the Donation</a> database of corporate matching gift and volunteer grant programs with your GiveWP donation forms. Don't have an account with Double the Donation yet?
+				<a href="https://zfrmz.com/ciL5Qb5coNEPElvUnYpu" target="_blank">Click here to get started!</a></p>
+		</div>
+
+    <?php }
 }
