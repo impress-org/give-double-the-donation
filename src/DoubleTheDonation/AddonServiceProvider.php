@@ -113,7 +113,7 @@ class AddonServiceProvider implements ServiceProvider {
 
 			<p>Seamlessly integrate the
 				<a href="https://doublethedonation.com" target="_blank">Double the Donation</a> database of corporate matching gift and volunteer grant programs with your GiveWP donation forms. Don't have an account with Double the Donation yet?
-				<a href="https://zfrmz.com/ciL5Qb5coNEPElvUnYpu" target="_blank">Click here to get started!</a></p>
+				<a href="http://docs.givewp.com/dtd-get-started" target="_blank">Click here to get started!</a></p>
 		</div>
 
     <?php }

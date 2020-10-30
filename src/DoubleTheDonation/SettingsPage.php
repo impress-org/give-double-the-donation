@@ -57,7 +57,7 @@ class SettingsPage extends \Give_Settings_Page {
             [
                 'name'  => esc_html__( 'Documentation', 'give' ),
                 'id'    => 'dtd_docs_link',
-                'url'   => esc_url( 'http://docs.givewp.com/double-the-donation' ),
+                'url'   => esc_url( 'http://docs.givewp.com/dtd-docs' ),
                 'title' => esc_html__( 'Documentation', 'give' ),
                 'type'  => 'give_docs_link',
             ],
