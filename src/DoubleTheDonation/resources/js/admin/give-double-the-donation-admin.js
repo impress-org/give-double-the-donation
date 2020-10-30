@@ -1,6 +1,6 @@
 
 window.addEventListener('load', () => {
-        
+    
     const updateLabelField = (value) => {
         if (value === 'enabled') {
             document.querySelector('.give_dtd_label_field').classList.remove('give-hidden');
