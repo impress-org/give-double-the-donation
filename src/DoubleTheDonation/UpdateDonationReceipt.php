@@ -21,7 +21,7 @@ class UpdateDonationReceipt {
 
 		if ( isset($instructions['company_name']) ) { ?>
 			<tr>
-				<td scope="row"><strong><?php esc_html_e( 'Employer', 'give-funds' ); ?></strong></td>
+				<td scope="row"><strong><?php esc_html_e( 'Employer', 'give-double-the-donation' ); ?></strong></td>
 				<td><?php echo $instructions['company_name']; ?></td>
 			</tr>
 
@@ -29,7 +29,7 @@ class UpdateDonationReceipt {
 
 		if ( isset($instructions['next_steps']) ) { ?>
 			<tr>
-				<td scope="row"><strong><?php esc_html_e( 'Employer Matching', 'give-funds' ); ?></strong></td>
+				<td scope="row"><strong><?php esc_html_e( 'Employer Matching', 'give-double-the-donation' ); ?></strong></td>
 				<td><?php echo $instructions['next_steps']; ?></td>
 			</tr>
 		<?php }
