@@ -15,7 +15,7 @@ class DonationForm {
 	 */
 	public function employerMatchField( $form_id ) {
 
-		if ( ! give_get_meta( $form_id, 'dtd_enable_disable', true, false ) ) {
+		if ( give_get_meta( $form_id, 'dtd_enable_disable', true, 'disabled' ) === 'disabled' ) {
 			return false;
 		}
 
