@@ -24,7 +24,7 @@ jobs:
       - name: Install npm dependencies
         run: |
           npm ci
-          sudo npm run build
+          sudo npm run production
           
       - name: Generate plugin artifact
         run: |
