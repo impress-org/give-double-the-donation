@@ -8,7 +8,7 @@ use GiveDoubleTheDonation\DoubleTheDonation\AddonServiceProvider;
  * Plugin Name: Give - Double the Donation
  * Plugin URI:  https://givewp.com/addons/give-double-the-donation/
  * Description: Easily integrate with the Double the Donation employer matching platform.
- * Version:     1.0.0-beta.1
+ * Version:     1.0.0
  * Author:      GiveWP
  * Author URI:  https://givewp.com/
  * Text Domain: give-double-the-donation
