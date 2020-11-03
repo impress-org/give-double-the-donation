@@ -17,13 +17,19 @@ class ActivationBanner {
 	 * @return void
 	 */
 	public function show() {
+
+		// Check for Activation banner class.
+		if ( ! class_exists( 'Give_Addon_Activation_Banner' ) ) {
+			include GIVE_PLUGIN_DIR . 'includes/admin/class-addon-activation-banner.php';
+		}
+
 		// Only runs on admin.
 		$args = [
 			'file'              => GIVE_DTD_FILE,
-			'name'              => GIVE_DTD_NAME,
+			'name'              => 'Double the Donation',
 			'version'           => GIVE_DTD_VERSION,
-			'settings_url'      => admin_url( 'edit.php?post_type=give_forms&page=give-settings&tab=give-addon-boilerplate' ),
-			'documentation_url' => 'https://givewp.com/documentation/add-ons/boilerplate/',
+			'settings_url'      => admin_url( 'edit.php?post_type=give_forms&page=give-settings&tab=general&section=double-the-donation' ),
+			'documentation_url' => 'https://docs.givewp.com/double-the-donation/',
 			'support_url'       => 'https://givewp.com/support/',
 			'testing'           => false, // Never leave true.
 		];

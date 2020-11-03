@@ -16,13 +16,6 @@ class Assets {
 	 * @return void
 	 */
 	public static function loadBackendAssets() {
-		wp_enqueue_style(
-			'give-double-the-donation-style-backend',
-			GIVE_DTD_URL . 'public/css/give-double-the-donation-admin.css',
-			[],
-			GIVE_DTD_VERSION
-		);
-
 		wp_enqueue_script(
 			'give-double-the-donation-script-backend',
 			GIVE_DTD_URL . 'public/js/give-double-the-donation-admin.js',
@@ -39,19 +32,18 @@ class Assets {
 	 * @return void
 	 */
 	public static function loadFrontendAssets() {
-		wp_enqueue_style(
-			'give-double-the-donation-style-frontend',
-			GIVE_DTD_URL . 'public/css/give-double-the-donation.css',
-			[],
-			GIVE_DTD_VERSION
-		);
 
 		wp_enqueue_script(
-			'give-double-the-donation-script-frontend',
-			GIVE_DTD_URL . 'public/js/give-double-the-donation.js',
-			[],
-			GIVE_DTD_VERSION,
-			true
+			'give-double-the-donation-style-script',
+			'https://doublethedonation.com/api/js/ddplugin.js',
+			[]
 		);
+		wp_enqueue_style(
+			'give-double-the-donation-style',
+			'https://doublethedonation.com/api/css/ddplugin.css',
+			[]
+		);
+
+
 	}
 }

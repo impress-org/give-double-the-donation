@@ -1,15 +1,16 @@
 <?php
+
 namespace GiveDoubleTheDonation\DoubleTheDonation;
 
 use Give\Helpers\Hooks;
 use Give\ServiceProviders\ServiceProvider;
 
-use GiveDoubleTheDonation\DoubleTheDonation\Helpers\SettingsPage;
-use GiveDoubleTheDonation\DoubleTheDonation\SettingsPage as AddonSettingsPage;
 use GiveDoubleTheDonation\Addon\Activation;
 use GiveDoubleTheDonation\Addon\License;
 use GiveDoubleTheDonation\Addon\Language;
 use GiveDoubleTheDonation\Addon\ActivationBanner;
+
+use GiveDoubleTheDonation\DoubleTheDonation\Helpers\SettingsPage as SettingsPageRegister;
 
 /**
  * Example of a service provider responsible for add-on initialization.
@@ -23,6 +24,7 @@ class AddonServiceProvider implements ServiceProvider {
 	 */
 	public function register() {
 		give()->singleton( Activation::class );
+		give()->singleton( SettingsPageContent::class );
 	}
 
 	/**
@@ -31,6 +33,16 @@ class AddonServiceProvider implements ServiceProvider {
 	public function boot() {
 		// Load add-on translations.
 		Hooks::addAction( 'init', Language::class, 'load' );
+		Hooks::addAction( 'give_donation_form_user_info', DonationForm::class, 'employerMatchField' );
+
+		Hooks::addAction( 'give_insert_payment', Payment::class, 'addPaymentMeta', 10, 2 );
+		Hooks::addAction( 'give_insert_payment', Payment::class, 'addDonationToDTD', 11, 2 );
+
+		// Show Receipt info
+		Hooks::addAction( 'give_payment_receipt_after', UpdateDonationReceipt::class, 'renderLegacyRow', 10, 2 );
+		Hooks::addAction( 'give_new_receipt', UpdateDonationReceipt::class, 'renderRowSequoiaTemplate' );
+
+		Hooks::addFilter( 'give_metabox_form_data_settings', SettingsDonationForm::class, 'addSettings' );
 
 		is_admin()
 			? $this->loadBackend()
@@ -45,33 +57,19 @@ class AddonServiceProvider implements ServiceProvider {
 	 * @return void
 	 */
 	private function loadBackend() {
-		// Register settings page
-		SettingsPage::registerPage( AddonSettingsPage::class );
 
 		Hooks::addAction( 'admin_init', License::class, 'check' );
 		Hooks::addAction( 'admin_init', ActivationBanner::class, 'show' );
 		// Load backend assets.
 		Hooks::addAction( 'admin_enqueue_scripts', Assets::class, 'loadBackendAssets' );
-		/**
-		 * Example of how to extend an existing settings page.
-		 */
-		// Remove settings page section.
-		SettingsPage::removePageSection( 'general', 'access-control' );
-		// Add new settings page section.
-		SettingsPage::addPageSection( 'general', 'new-section', 'New Access Control Section' );
-		// Add page settings.
-		SettingsPage::addSettings(
-			'general',
-			'new-section',
-			[
-				[
-					'name' => __( 'Custom Setting Field', 'give-double-the-donation' ),
-					'id'   => 'custom_setting_field',
-					'desc' => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ', 'give-double-the-donation' ),
-					'type' => 'text',
-				],
-			]
-		);
+
+		// Register settings page
+		SettingsPageRegister::registerPage( SettingsPage::class );
+
+		Hooks::addFilter( 'plugin_action_links_' . GIVE_DTD_BASENAME, SettingsPageContent::class, 'addSettingsLink' );
+
+		// Will display html of the import donation.
+		Hooks::addAction( 'give_admin_field_dtd_intro', SettingsPageContent::class, 'renderIntro' );
 	}
 
 	/**

@@ -1,13 +1,44 @@
-=== Give - Addon Boilerplate ===
-Contributors: givewp, wordimpress, dlocc, webdevmattcrom
+=== Give - Double the Donation ===
+Contributors: givewp, dlocc
 Donate link: https://givewp.com/
-Tags: givewp, donation, donations, donation plugin, wordpress donation plugin, wp donation, donors, display donors, give donors, anonymous donations
-Requires at least: 4.8
+Tags: givewp, donation, donations, double the donation, employer matching, company matching donation, employer matching donations
+Requires at least: 5.0
 Tested up to: 5.5
 Requires PHP: 5.6
-Stable tag: 1.0
-Requires Give: 2.8.0
+Stable tag: 1.0.0
+Requires Give: 2.9.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-A Give Add-on Boilerplate to help devs better understand how to extend the Give Donation plugin for WordPress.
+Easily integrate with the Double the Donation employer matching platform.
+
+== Description ==
+
+This plugin requires the GiveWP plugin activated to function properly. When activated, it adds an integration with Double the Donation's 360MatchPro API.
+
+== Installation ==
+
+= Minimum Requirements =
+
+* WordPress 4.8 or greater
+* PHP version 5.6 or greater
+* MySQL version 5.5 or greater
+
+= Automatic installation =
+
+Automatic installation is the easiest option as WordPress handles the file transfers itself and you don't need to leave your web browser. To do an automatic install of Give, log in to your WordPress dashboard, navigate to the Plugins menu and click Add New.
+
+In the search field type "Give" and click Search Plugins. Once you have found the plugin you can view details about it such as the the point release, rating and description. Most importantly of course, you can install it by simply clicking "Install Now".
+
+= Manual installation =
+
+The manual installation method involves downloading our donation plugin and uploading it to your server via your favorite FTP application. The WordPress codex contains [instructions on how to do this here](http://codex.wordpress.org/Managing_Plugins#Manual_Plugin_Installation).
+
+= Updating =
+
+Automatic updates should work like a charm; as always though, ensure you backup your site just in case.
+
+== Changelog ==
+
+= 1.0.0: October 26th, 2020 =
+* Initial plugin release. Yippee!

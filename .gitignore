@@ -49,5 +49,8 @@ public
 # Composer
 vendor
 
-# Assert directory
+# Assets directory
 assets/dist
+
+# POT File
+languages/give.pot
