@@ -4,6 +4,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## 1.0.0 - 2020-11-03
+
 ### Fixed
 
 -   Double the Donation settings have been reviewed (#6)
