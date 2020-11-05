@@ -28,7 +28,7 @@ class ActivationBanner {
 			'file'              => GIVE_DTD_FILE,
 			'name'              => 'Double the Donation',
 			'version'           => GIVE_DTD_VERSION,
-			'settings_url'      => admin_url( 'edit.php?post_type=give_forms&page=give-settings&tab=general&section=double-the-donation' ),
+			'settings_url'      => admin_url( 'edit.php?post_type=give_forms&page=give-settings&tab=give-double-the-donation' ),
 			'documentation_url' => 'https://docs.givewp.com/double-the-donation/',
 			'support_url'       => 'https://givewp.com/support/',
 			'testing'           => false, // Never leave true.

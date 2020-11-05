@@ -41,7 +41,7 @@ class SettingsPageContent {
 		$new_actions = [
 			'settings' => sprintf(
 				'<a href="%1$s">%2$s</a>',
-				admin_url( 'edit.php?post_type=give_forms&page=give-settings&tab=general&section=double-the-donation' ),
+				admin_url( 'edit.php?post_type=give_forms&page=give-settings&tab=give-double-the-donation' ),
 				__( 'Settings', 'give-double-the-donation' )
 			),
 		];
