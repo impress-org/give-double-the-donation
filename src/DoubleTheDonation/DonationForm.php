@@ -33,16 +33,13 @@ class DonationForm {
 		?>
 
 		<div class="give-double-the-donation-wrap form-row form-row-wide" <?php echo $divStyle; ?>>
+			<label class="give-label" for="give-first" <?php echo $labelStyle ?>><?php echo $dtdLabel; ?></label>
+			<div id="dd-company-name-input"></div>
 			<script>
 				if ( window.doublethedonation ) {
 					var DDCONF = { 'API_KEY': '<?php echo $dtdPublicKey; ?>' };
-					document.addEventListener( 'give_gateway_loaded', ( e ) => {
-						doublethedonation.plugin.load_streamlined_input();
-					} );
 				}
 			</script>
-			<label class="give-label" for="give-first" <?php echo $labelStyle ?>><?php echo $dtdLabel; ?></label>
-			<div id="dd-company-name-input"></div>
 		</div>
 		<?php
 	}
