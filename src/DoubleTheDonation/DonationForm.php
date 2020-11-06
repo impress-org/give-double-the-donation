@@ -25,24 +25,21 @@ class DonationForm {
 		}
 
 		// Do not handle legacy donation form.
-		$labelStyle = ! FormUtils::isLegacyForm() ? 'style="display: block !important; font-size: 14px;"'  : '';
-		$divStyle = ! FormUtils::isLegacyForm() ? 'style="margin: 0 0 20px;"'  : '';
-
+		$isLegacyForm = FormUtils::isLegacyForm();
+		$labelStyle = ! $isLegacyForm ? 'style="display: block !important; font-size: 14px;"'  : '';
+		$divStyle = ! $isLegacyForm ? 'style="margin: 0 0 20px;"'  : '';
 
 		$dtdLabel = give_get_meta( $form_id, 'give_dtd_label', true, esc_html__( 'See if your company will match your donation!', 'give-double-the-donation' ) );
 		?>
 
 		<div class="give-double-the-donation-wrap form-row form-row-wide" <?php echo $divStyle; ?>>
+			<label class="give-label" for="give-first" <?php echo $labelStyle ?>><?php echo $dtdLabel; ?></label>
+			<div class="dd-company-name-input"></div>
 			<script>
 				if ( window.doublethedonation ) {
 					var DDCONF = { 'API_KEY': '<?php echo $dtdPublicKey; ?>' };
-					document.addEventListener( 'give_gateway_loaded', ( e ) => {
-						doublethedonation.plugin.load_streamlined_input();
-					} );
 				}
 			</script>
-			<label class="give-label" for="give-first" <?php echo $labelStyle ?>><?php echo $dtdLabel; ?></label>
-			<div id="dd-company-name-input"></div>
 		</div>
 		<?php
 	}
