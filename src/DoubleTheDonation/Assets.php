@@ -45,7 +45,7 @@ class Assets {
 		);
 
 		wp_enqueue_script(
-			'give-double-the-donation-script-backend',
+			'give-double-the-donation-script-frontend',
 			GIVE_DTD_URL . 'public/js/give-double-the-donation.js',
 			['give-double-the-donation-script'],
 			GIVE_DTD_VERSION,
