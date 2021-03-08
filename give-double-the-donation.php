@@ -1,9 +1,4 @@
-<?php namespace GiveDoubleTheDonation;
-
-use GiveDoubleTheDonation\Addon\Activation;
-use GiveDoubleTheDonation\Addon\Environment;
-use GiveDoubleTheDonation\DoubleTheDonation\AddonServiceProvider;
-
+<?php
 /**
  * Plugin Name: Give - Double the Donation
  * Plugin URI:  https://givewp.com/addons/give-double-the-donation/
@@ -14,6 +9,13 @@ use GiveDoubleTheDonation\DoubleTheDonation\AddonServiceProvider;
  * Text Domain: give-double-the-donation
  * Domain Path: /languages
  */
+
+namespace GiveDoubleTheDonation;
+
+use GiveDoubleTheDonation\Addon\Activation;
+use GiveDoubleTheDonation\Addon\Environment;
+use GiveDoubleTheDonation\DoubleTheDonation\AddonServiceProvider;
+
 defined( 'ABSPATH' ) or exit;
 
 // Add-on name

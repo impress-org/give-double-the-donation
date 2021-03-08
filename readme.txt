@@ -3,7 +3,7 @@ Contributors: givewp, dlocc, webdevmattcrom, jason_the_adams
 Donate link: https://givewp.com/
 Tags: givewp, double the donation, employer matching, company matching donation, employer matching donations
 Requires at least: 5.0
-Tested up to: 5.5
+Tested up to: 5.7
 Requires PHP: 5.6
 Stable tag: 1.0.0
 Requires Give: 2.9.0
