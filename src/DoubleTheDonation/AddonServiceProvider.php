@@ -33,7 +33,7 @@ class AddonServiceProvider implements ServiceProvider {
 	public function boot() {
 		// Load add-on translations.
 		Hooks::addAction( 'init', Language::class, 'load' );
-		Hooks::addAction( 'give_donation_form_user_info', DonationForm::class, 'employerMatchField' );
+		Hooks::addAction( 'give_donation_form_after_email', DonationForm::class, 'employerMatchField' );
 
 		Hooks::addAction( 'give_insert_payment', Payment::class, 'addPaymentMeta', 10, 2 );
 		Hooks::addAction( 'give_insert_payment', Payment::class, 'addDonationToDTD', 11, 2 );
