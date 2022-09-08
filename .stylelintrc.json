@@ -1,4 +1,0 @@
-{
-    "extends": ["stylelint-config-wordpress", "stylelint-prettier/recommended"],
-    "rules": {}
-}
