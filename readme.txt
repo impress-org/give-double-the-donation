@@ -3,9 +3,9 @@ Contributors: givewp, dlocc, webdevmattcrom, jason_the_adams
 Donate link: https://givewp.com/
 Tags: givewp, double the donation, employer matching, company matching donation, employer matching donations
 Requires at least: 5.0
-Tested up to: 5.7
-Requires PHP: 5.6
-Stable tag: 1.0.0
+Tested up to: 6.0
+Requires PHP: 7.0
+Stable tag: 1.0.1
 Requires Give: 2.9.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -74,6 +74,9 @@ Your company will get an email and you will as well with next steps to follow. I
 This is our initial release, huzzah!
 
 == Changelog ==
+
+= 1.0.1: September 8th, 2022 =
+* Fix: resolved a periodic issue where the donation fields would appear twice in a form
 
 = 1.0.0: November 5, 2020 =
 * Initial plugin release. Yippee!
