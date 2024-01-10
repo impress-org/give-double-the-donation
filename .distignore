@@ -44,3 +44,10 @@ webpack.config.js
 docker-compose.yml
 wp-textdomain.js
 webpack.mix.js
+
+# github actions
+DOCKER_ENV
+docker_tag
+.distignore
+output.log
+
