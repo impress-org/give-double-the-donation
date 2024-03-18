@@ -1,0 +1,22 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": "2",
+    "name": "givewp/dtd",
+    "version": "1.0.0",
+    "title": "Double The Donation",
+    "category": "addons",
+    "description": "Empower your donors to have their company match their donations",
+    "keywords": [
+        "Double The Donation",
+        "DTD",
+        "Double",
+        "Donation"
+    ],
+    "supports": {
+        "align": [
+            "wide"
+        ]
+    },
+    "attributes": {},
+    "textdomain": "give-double-the-donation"
+}

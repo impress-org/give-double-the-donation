@@ -18,7 +18,7 @@ class Assets {
 	public static function loadBackendAssets() {
 		wp_enqueue_script(
 			'give-double-the-donation-script-backend',
-			GIVE_DTD_URL . 'public/js/give-double-the-donation-admin.js',
+            GIVE_DTD_URL . 'build/backend.js',
 			[],
 			GIVE_DTD_VERSION,
 			true
@@ -46,7 +46,7 @@ class Assets {
 
 		wp_enqueue_script(
 			'give-double-the-donation-script-frontend',
-			GIVE_DTD_URL . 'public/js/give-double-the-donation.js',
+            GIVE_DTD_URL . 'build/frontend.js',
 			['give-double-the-donation-script'],
 			GIVE_DTD_VERSION,
 			true
