@@ -2,11 +2,26 @@
 
 namespace GiveDoubleTheDonation\DoubleTheDonation\FormExtension\Actions;
 
+use GiveDoubleTheDonation\DoubleTheDonation\Helpers\Credentials;
+
 /**
  * @unreleased
  */
 class LoadAssets
 {
+    /**
+     * @var Credentials
+     */
+    private $credentials;
+
+    /**
+     * @param Credentials $credentials
+     */
+    public function __construct(Credentials $credentials)
+    {
+        $this->credentials = $credentials;
+    }
+
     /**
      * Load Form builder block
      *
@@ -20,6 +35,14 @@ class LoadAssets
             [],
             GIVE_DTD_VERSION,
             true
+        );
+
+        wp_localize_script(
+            'givewp-form-extension-dtd-block',
+            'GiveDTD',
+            [
+                'isApiKeyValid' => $this->credentials->isApiKeyValid(),
+            ]
         );
     }
 
@@ -41,6 +64,14 @@ class LoadAssets
         wp_enqueue_style(
             'givewp-form-extension-dtd-template',
             GIVE_DTD_URL . 'build/template.css'
+        );
+
+        wp_localize_script(
+            'givewp-form-extension-dtd-template',
+            'GiveDTD',
+            [
+                'isApiKeyValid' => $this->credentials->isApiKeyValid(),
+            ]
         );
     }
 }
