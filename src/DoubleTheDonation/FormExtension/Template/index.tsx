@@ -15,4 +15,4 @@ function Template() {
 export default Template;
 
 // @ts-ignore
-window.givewp.form.templates.groups.dtd = Template;
+window.givewp.form.templates.fields.dtd = Template;
