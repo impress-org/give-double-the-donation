@@ -1,6 +1,6 @@
 <?php
 
-namespace GiveDoubleTheDonation\Addon\Helpers;
+namespace GiveDoubleTheDonation\Addon;
 
 use InvalidArgumentException;
 
@@ -10,43 +10,50 @@ use InvalidArgumentException;
  * @package     GiveDoubleTheDonation\Addon\Helpers
  * @copyright   Copyright (c) 2020, GiveWP
  */
-class View {
+class View
+{
 
-	/**
-	 * @param string $view
-	 * @param array $templateParams Arguments for template.
-	 * @param bool $echo
-	 *
-	 * @throws InvalidArgumentException if template file not exist
-	 *
-	 * @since 1.0.0
-	 * @return string|void
-	 */
-	public static function load( $view, $templateParams = [], $echo = false ) {
-		$template = GIVE_DTD_DIR . 'src/Addon/resources/views/' . $view . '.php';
+    /**
+     * @since 1.0.0
+     *
+     * @param array  $templateParams Arguments for template.
+     * @param bool   $echo
+     *
+     * @param string $view
+     *
+     * @return string|void
+     * @throws InvalidArgumentException if template file not exist
+     *
+     */
+    public static function load($view, $templateParams = [], $echo = false)
+    {
+        $template = GIVE_DTD_DIR . 'src/DoubleTheDonation/resources/views/' . $view . '.php';
 
-		if ( ! file_exists( $template ) ) {
-			throw new InvalidArgumentException( "View template file {$template} not exist" );
-		}
+        if ( ! file_exists($template)) {
+            throw new InvalidArgumentException("View template file {$template} not exist");
+        }
 
-		ob_start();
-		include $template;
-		$content = ob_get_clean();
+        ob_start();
+        extract($templateParams);
+        include $template;
+        $content = ob_get_clean();
 
-		if ( ! $echo ) {
-			return $content;
-		}
+        if ( ! $echo) {
+            return $content;
+        }
 
-		echo $content;
-	}
+        echo $content;
+    }
 
-	/**
-	 * @param string $view
-	 * @param array $vars
-	 *
-	 * @since 1.0.0
-	 */
-	public static function render( $view, $vars = [] ) {
-		static::load( $view, $vars, true );
-	}
+    /**
+     * @since 1.0.0
+     *
+     * @param array  $vars
+     *
+     * @param string $view
+     */
+    public static function render($view, $vars = [])
+    {
+        static::load($view, $vars, true);
+    }
 }
