@@ -2,12 +2,12 @@
 
 namespace GiveDoubleTheDonation\DoubleTheDonation\FormExtension;
 
-use Give\Framework\FieldsAPI\Group;
+use Give\Framework\FieldsAPI\Field as FieldsApiField;
 
 /**
  * @unreleased
  */
-class Field extends Group
+class Field extends FieldsApiField
 {
     const TYPE = 'dtd';
 }
