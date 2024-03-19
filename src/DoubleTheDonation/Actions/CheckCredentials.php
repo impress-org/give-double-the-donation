@@ -3,7 +3,7 @@
 namespace GiveDoubleTheDonation\DoubleTheDonation\Actions;
 
 use GiveDoubleTheDonation\Addon\Notices;
-use GiveDoubleTheDonation\DoubleTheDonation\Helpers\Credentials;
+use GiveDoubleTheDonation\DoubleTheDonation\Helpers\DoubleTheDonationApi;
 
 /**
  * Action used to check DTD credentials when DTD settings are saved
@@ -13,9 +13,7 @@ class CheckCredentials
 {
     public function __invoke()
     {
-        $credentials = give(Credentials::class);
-
-        if ( ! $credentials->check()) {
+        if ( ! give(DoubleTheDonationApi::class)->checkKey()) {
             Notices::invalidCredentials();
         }
     }

@@ -7,7 +7,7 @@ namespace GiveDoubleTheDonation\DoubleTheDonation\Helpers;
  *
  * @unreleased
  */
-class Credentials
+class DoubleTheDonationApi
 {
     /**
      * Transient key
@@ -36,33 +36,14 @@ class Credentials
     }
 
     /**
-     * @return false|string
      * @unreleased
      */
-    public function getPublicKey()
-    {
-        return $this->publicKey;
-    }
-
-    /**
-     * @return false|string
-     * @unreleased
-     */
-    public function getPrivateKey()
-    {
-        return $this->privateKey;
-    }
-
-
-    /**
-     * @unreleased
-     */
-    public function isApiKeyValid(): bool
+    public function isKeyValid(): bool
     {
         $isValid = get_transient($this->key);
 
         if ($isValid === false) {
-            return $this->check();
+            return $this->checkKey();
         }
 
         return $isValid === 'valid';
@@ -73,7 +54,7 @@ class Credentials
      *
      * @unreleased
      */
-    public function check(): bool
+    public function checkKey(): bool
     {
         if ( ! $this->publicKey || ! $this->privateKey) {
             return false;
@@ -82,8 +63,8 @@ class Credentials
         $request = wp_remote_post(
             sprintf(
                 'https://doublethedonation.com/api/360matchpro-partners/v1/verify-360-keys?360matchpro_public_key=%s&360matchpro_private_key=%s',
-                $this->getPublicKey(),
-                $this->getPrivateKey()
+                $this->publicKey,
+                $this->privateKey
             )
         );
 

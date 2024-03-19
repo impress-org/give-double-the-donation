@@ -2,7 +2,7 @@
 
 namespace GiveDoubleTheDonation\DoubleTheDonation\FormExtension\Actions;
 
-use GiveDoubleTheDonation\DoubleTheDonation\Helpers\Credentials;
+use GiveDoubleTheDonation\DoubleTheDonation\Helpers\DoubleTheDonationApi;
 
 /**
  * @unreleased
@@ -10,16 +10,16 @@ use GiveDoubleTheDonation\DoubleTheDonation\Helpers\Credentials;
 class LoadAssets
 {
     /**
-     * @var Credentials
+     * @var DoubleTheDonationApi
      */
-    private $credentials;
+    private $api;
 
     /**
-     * @param Credentials $credentials
+     * @param DoubleTheDonationApi $api
      */
-    public function __construct(Credentials $credentials)
+    public function __construct(DoubleTheDonationApi $api)
     {
-        $this->credentials = $credentials;
+        $this->api = $api;
     }
 
     /**
@@ -41,7 +41,7 @@ class LoadAssets
             'givewp-form-extension-dtd-block',
             'GiveDTD',
             [
-                'isApiKeyValid' => $this->credentials->isApiKeyValid(),
+                'isApiKeyValid' => $this->api->isKeyValid(),
             ]
         );
     }
@@ -70,7 +70,7 @@ class LoadAssets
             'givewp-form-extension-dtd-template',
             'GiveDTD',
             [
-                'isApiKeyValid' => $this->credentials->isApiKeyValid(),
+                'isApiKeyValid' => $this->api->isKeyValid(),
             ]
         );
     }
