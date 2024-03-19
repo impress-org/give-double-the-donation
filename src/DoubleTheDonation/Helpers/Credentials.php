@@ -10,6 +10,13 @@ namespace GiveDoubleTheDonation\DoubleTheDonation\Helpers;
 class Credentials
 {
     /**
+     * Transient key
+     *
+     * @unreleased
+     */
+    private $key = 'give_dtd_api';
+
+    /**
      * @var false|string
      */
     private $publicKey;
@@ -46,6 +53,21 @@ class Credentials
         return $this->privateKey;
     }
 
+
+    /**
+     * @unreleased
+     */
+    public function isApiKeyValid(): bool
+    {
+        $isValid = get_transient($this->key);
+
+        if ($isValid === false) {
+            return $this->check();
+        }
+
+        return $isValid === 'valid';
+    }
+
     /**
      * Check credentials.
      *
@@ -70,6 +92,12 @@ class Credentials
         }
 
         $response = json_decode(wp_remote_retrieve_body($request));
+
+        set_transient(
+            $this->key,
+            $response->public_key_valid ? 'valid' : '',
+            DAY_IN_SECONDS
+        );
 
         return $response->public_key_valid;
     }
