@@ -37,5 +37,10 @@ class LoadAssets
             GIVE_DTD_VERSION,
             true
         );
+
+        wp_enqueue_style(
+            'givewp-form-extension-dtd-template',
+            GIVE_DTD_URL . 'build/template.css'
+        );
     }
 }
