@@ -17,6 +17,11 @@
             "wide"
         ]
     },
-    "attributes": {},
+    "attributes": {
+        "isApiKeyValid": {
+            "type": "boolean",
+            "default": false
+        }
+    },
     "textdomain": "give-double-the-donation"
 }
