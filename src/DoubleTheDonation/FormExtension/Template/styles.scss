@@ -1,0 +1,16 @@
+.give-dtd-block-template {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 24px;
+    padding: 1.5rem 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px 0 #ebebeb;
+    border: dashed 1px #737373;
+    background-color: #fff;
+    font-size: 0.875rem;
+    font-weight: normal;
+    line-height: 1.57;
+}
