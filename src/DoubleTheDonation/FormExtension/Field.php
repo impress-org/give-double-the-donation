@@ -3,6 +3,7 @@
 namespace GiveDoubleTheDonation\DoubleTheDonation\FormExtension;
 
 use Give\Framework\FieldsAPI\Field as FieldsApiField;
+use InvalidArgumentException;
 
 /**
  * @unreleased
@@ -10,4 +11,43 @@ use Give\Framework\FieldsAPI\Field as FieldsApiField;
 class Field extends FieldsApiField
 {
     const TYPE = 'dtd';
+
+    protected $company_id;
+    protected $company_name;
+    protected $entered_text;
+
+
+    /**
+     * Check if class property exist
+     *
+     * @unreleased
+     */
+    public function has($name): bool
+    {
+        return property_exists(__CLASS__, $name);
+    }
+
+    /**
+     * Get property
+     *
+     * @unreleased
+     */
+    public function get(string $prop)
+    {
+        return $this->{$prop};
+    }
+
+    /**
+     * Set property
+     *
+     * @unreleased
+     */
+    public function set(string $prop, string $value): Field
+    {
+        if ($this->has($prop)) {
+            $this->{$prop} = $value;
+        }
+
+        return $this;
+    }
 }

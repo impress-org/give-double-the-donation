@@ -18,9 +18,17 @@
         ]
     },
     "attributes": {
-        "isApiKeyValid": {
-            "type": "boolean",
-            "default": false
+        "company_id": {
+            "type": "string",
+            "default": ""
+        },
+        "company_name": {
+            "type": "string",
+            "default": ""
+        },
+        "entered_text": {
+            "type": "string",
+            "default": ""
         }
     },
     "textdomain": "give-double-the-donation"
