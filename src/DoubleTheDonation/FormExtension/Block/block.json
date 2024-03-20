@@ -18,17 +18,17 @@
         ]
     },
     "attributes": {
-        "company_id": {
+        "label": {
             "type": "string",
-            "default": ""
+            "default": "See if your company will match your donation"
         },
-        "company_name": {
-            "type": "string",
-            "default": ""
-        },
-        "entered_text": {
-            "type": "string",
-            "default": ""
+        "data": {
+            "type": "object",
+            "default": {
+                "company_id": "",
+                "company_name": "",
+                "entered_text": ""
+            }
         }
     },
     "textdomain": "give-double-the-donation"
