@@ -29,11 +29,13 @@ class LoadAssets
      */
     public function formBuilder(): void
     {
+        $assets = require(GIVE_DTD_DIR . 'build/block.asset.php');
+
         wp_enqueue_script(
             'givewp-form-extension-dtd-block',
             GIVE_DTD_URL . 'build/block.js',
-            [],
-            GIVE_DTD_VERSION,
+            $assets['dependencies'],
+            $assets['version'],
             true
         );
 
@@ -53,17 +55,21 @@ class LoadAssets
      */
     public function donationForm(): void
     {
+        $assets = require(GIVE_DTD_DIR . 'build/template.asset.php');
+
         wp_enqueue_script(
             'givewp-form-extension-dtd-template',
             GIVE_DTD_URL . 'build/template.js',
-            [],
-            GIVE_DTD_VERSION,
+            $assets['dependencies'],
+            $assets['version'],
             true
         );
 
         wp_enqueue_style(
             'givewp-form-extension-dtd-template',
-            GIVE_DTD_URL . 'build/template.css'
+            GIVE_DTD_URL . 'build/template.css',
+            [],
+            $assets['version']
         );
 
         wp_localize_script(
