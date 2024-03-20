@@ -21,7 +21,7 @@ export default ({label, text, onSelect, onChange, companies}) => {
                 onSelect({
                     company_id: companyId,
                     company_name: company.company_name,
-                    entered_text: company.company_name,
+                    entered_text: text,
                 });
             }}
             options={filtered}
