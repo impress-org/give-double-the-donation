@@ -1,0 +1,15 @@
+.give-dtd-company-search {
+    .components-form-token-field__suggestions-list {
+        margin-top: 30px;
+        list-style: none;
+
+        li {
+            cursor: pointer;
+
+            &::marker {
+                content: '';
+            }
+        }
+    }
+}
+
