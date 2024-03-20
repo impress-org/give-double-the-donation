@@ -3,7 +3,6 @@
 namespace GiveDoubleTheDonation\DoubleTheDonation\FormExtension;
 
 use Give\Framework\FieldsAPI\Field as FieldsApiField;
-use InvalidArgumentException;
 
 /**
  * @unreleased
@@ -42,12 +41,36 @@ class Field extends FieldsApiField
      *
      * @unreleased
      */
-    public function set(string $prop, string $value): Field
+    public function set(string $prop, ?string $value): Field
     {
         if ($this->has($prop)) {
             $this->{$prop} = $value;
         }
 
         return $this;
+    }
+
+    /**
+     * Get prop names
+     *
+     * @unreleased
+     */
+    public function getPropNames(): array
+    {
+        return [
+            'company_id',
+            'company_name',
+            'entered_text'
+        ];
+    }
+
+    /**
+     * Get prefixed meta key
+     *
+     * @unreleased
+     */
+    public function getMetaKey(string $key): string
+    {
+        return 'doublethedonation_' . $key;
     }
 }
