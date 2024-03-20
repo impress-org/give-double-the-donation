@@ -38,9 +38,8 @@ class ConvertBlockToField
      */
     private function setFieldAttributes(DoubleTheDonationField $field, BlockModel $block): void
     {
-        foreach ($field->getPropNames() as $name) {
-            $field->set($name, $block->getAttribute($name));
-        }
+        // set props from block attributes
+        $field->setLabel($block->getAttribute('label'));
     }
 
     /**
@@ -50,15 +49,16 @@ class ConvertBlockToField
      */
     private function handleFieldScope(DoubleTheDonationField $field): void
     {
-        $field->scope(function (DoubleTheDonationField $field, $value, Donation $donation) {
-            // todo: check value of company name|id?
-            return false;
+        $field->scope(function (DoubleTheDonationField $field, $data, Donation $donation) {
+            if (empty($data['company_id'])) {
+                return;
+            }
 
-            foreach ($field->getPropNames() as $name) {
+            foreach ($field->getDataAttributeProps() as $name) {
                 give_update_meta(
                     $donation->id,
-                    $field->getMetaKey($name),
-                    $field->get($name)
+                    $field->getKey($name),
+                    $data[$name]
                 );
             }
 
@@ -66,13 +66,13 @@ class ConvertBlockToField
             give_update_meta(
                 $donation->id,
                 '_give_donation_company',
-                $field->get('company_name')
+                $data['company_name']
             );
 
             Give()->donor_meta->update_meta(
                 $donation->donorId,
                 '_give_donor_company',
-                $field->get('company_name')
+                $data['company_name']
             );
         });
     }

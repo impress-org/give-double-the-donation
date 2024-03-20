@@ -11,51 +11,30 @@ class Field extends FieldsApiField
 {
     const TYPE = 'dtd';
 
-    protected $company_id;
-    protected $company_name;
-    protected $entered_text;
-
+    protected $label;
 
     /**
-     * Check if class property exist
-     *
      * @unreleased
      */
-    public function has($name): bool
+    public function setLabel(?string $label)
     {
-        return property_exists(__CLASS__, $name);
+        $this->label = $label;
     }
 
     /**
-     * Get property
-     *
      * @unreleased
      */
-    public function get(string $prop)
+    public function getLabel(): ?string
     {
-        return $this->{$prop};
+        return $this->label;
     }
 
     /**
-     * Set property
+     * Get prop names of the data attribute
      *
      * @unreleased
      */
-    public function set(string $prop, ?string $value): Field
-    {
-        if ($this->has($prop)) {
-            $this->{$prop} = $value;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Get prop names
-     *
-     * @unreleased
-     */
-    public function getPropNames(): array
+    public function getDataAttributeProps(): array
     {
         return [
             'company_id',
@@ -69,7 +48,7 @@ class Field extends FieldsApiField
      *
      * @unreleased
      */
-    public function getMetaKey(string $key): string
+    public function getKey(string $key): string
     {
         return 'doublethedonation_' . $key;
     }
