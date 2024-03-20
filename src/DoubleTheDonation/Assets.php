@@ -54,6 +54,7 @@ class Assets {
 			'give-double-the-donation-script-frontend',
             GIVE_DTD_URL . 'build/frontend.js',
             $assets['dependencies'],
+            $assets['version'],
 			true
 		);
 	}
