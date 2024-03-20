@@ -1,8 +1,9 @@
 import type {Company} from '../types';
 import {ComboboxControl} from '@wordpress/components';
+import './styles.scss';
 
-export default ({label, text, onSelect, onChange, companies}) => {
-    const filtered = companies.map((company: Company) => {
+export default ({label, searchText, onSelect, onChange, companies, selected}) => {
+    const options = companies.map((company: Company) => {
         return {
             value: company.id,
             label: company.company_name,
@@ -11,20 +12,21 @@ export default ({label, text, onSelect, onChange, companies}) => {
 
     return (
         <ComboboxControl
+            className="give-dtd-company-search"
             label={label}
-            value={text}
+            value={selected ?? searchText}
             allowReset={false}
-            onChange={companyId => {
+            onChange={id => {
                 // we need company name also
-                const company = companies.find((company: Company) => company.id === companyId);
+                const company = companies.find((company: Company) => company.id === id);
 
                 onSelect({
-                    company_id: companyId,
+                    id: company.id,
                     company_name: company.company_name,
-                    entered_text: text,
+                    entered_text: searchText,
                 });
             }}
-            options={filtered}
+            options={options}
             onFilterValueChange={onChange}
         />
     );
