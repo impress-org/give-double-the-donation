@@ -71,6 +71,7 @@ class LoadAssets
             'GiveDTD',
             [
                 'isApiKeyValid' => $this->api->isKeyValid(),
+                'endpoint' => 'https://doublethedonation.com/api/360matchpro-partners/v1'
             ]
         );
     }
