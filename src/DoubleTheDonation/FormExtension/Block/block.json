@@ -25,7 +25,7 @@
         "data": {
             "type": "object",
             "default": {
-                "company_id": "",
+                "id": "",
                 "company_name": "",
                 "entered_text": ""
             }
