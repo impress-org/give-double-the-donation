@@ -1,20 +1,13 @@
+import type {Company} from '../types';
 import {useEffect, useState} from 'react';
+import {CompanyDisplay, CompanySearch} from '../Components';
 import './styles.scss';
 
 declare const window: {
     GiveDTD: {
-        apiKey: string;
         endpoint: string;
     };
 } & Window;
-
-type Company = {
-    id: string;
-    company_name: string;
-    matching_gift_offered: boolean;
-    minimum_matched_amount?: number;
-    maximum_matched_amount?: number;
-}
 
 const initialState = {
     text: '',
@@ -24,7 +17,7 @@ const initialState = {
 /**
  * @unreleased
  */
-export default ({inputProps: {name, ref}}) => {
+export default ({inputProps: {name}}) => {
 
     // @ts-ignore
     const {useFormContext, useWatch} = window.givewp.form.hooks;
@@ -32,6 +25,7 @@ export default ({inputProps: {name, ref}}) => {
     const [data, setData] = useState(initialState);
 
     const donationAmount = useWatch({name: 'amount'});
+    const selectedCompany: Company = useWatch({name});
 
     useEffect(() => {
         // Debounce request
@@ -79,33 +73,39 @@ export default ({inputProps: {name, ref}}) => {
 
     }, [data.text, donationAmount]);
 
-    const handleChange = e => {
+    const handleChange = (text: string) => {
         setData({
             companies: [],
-            text: e.target.value,
+            text,
         });
     };
 
-    const handleCompanySelect = ({company_id, company_name}) => {
+    const handleCompanySelect = ({company_id, company_name, entered_text}) => {
         setValue(name, {
             company_id,
             company_name,
-            entered_text: data.text,
+            entered_text,
         });
     };
 
-    console.log(data.companies)
+    const handleCompanyDeselect = () => {
+        setValue(name, null);
+    };
 
 
-    return (
-        <div>
-            <input
-                name={name}
-                ref={ref}
-                value={data.text}
-                type="text"
-                onChange={handleChange}
+    return selectedCompany
+        ? (
+            <CompanyDisplay
+                company={selectedCompany}
+                onChange={handleCompanyDeselect}
             />
-        </div>
-    );
+        ) : (
+            <CompanySearch
+                label={'Search company'} // todo: get actual label
+                text={data.text}
+                companies={data.companies}
+                onChange={handleChange}
+                onSelect={handleCompanySelect}
+            />
+        );
 };
