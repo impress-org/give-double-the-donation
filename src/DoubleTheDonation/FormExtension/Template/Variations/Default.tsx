@@ -1,11 +1,12 @@
 import type {Company} from '../types';
 import {useEffect, useState} from 'react';
-import {CompanyDisplay, CompanySearch} from '../Components';
+import {__} from '@wordpress/i18n';
+import {CompanySearch} from '../Components';
 import './styles.scss';
 
 declare const window: {
     GiveDTD: {
-        endpoint: string;
+        searchEndpoint: string;
     };
 } & Window;
 
@@ -18,7 +19,6 @@ const initialState = {
  * @unreleased
  */
 export default ({inputProps: {name}}) => {
-
     // @ts-ignore
     const {useFormContext, useWatch} = window.givewp.form.hooks;
     const {setValue} = useFormContext();
@@ -34,7 +34,7 @@ export default ({inputProps: {name}}) => {
             if (!data.text)
                 return;
 
-            const response = await fetch(`${window.GiveDTD.endpoint}/search_by_company_prefix?company_name_prefix=${data.text}`, {
+            const response = await fetch(`${window.GiveDTD.searchEndpoint}?company_name_prefix=${data.text}`, {
                 mode: 'cors',
                 method: 'GET',
                 headers: {
@@ -78,34 +78,33 @@ export default ({inputProps: {name}}) => {
             companies: [],
             text,
         });
+
+        // Reset selected company
+        if (selectedCompany) {
+            setValue(name, null);
+        }
     };
 
-    const handleCompanySelect = ({company_id, company_name, entered_text}) => {
+    const handleSelect = ({id, company_name, entered_text}) => {
         setValue(name, {
-            company_id,
+            id,
             company_name,
             entered_text,
         });
     };
 
-    const handleCompanyDeselect = () => {
-        setValue(name, null);
-    };
+    const label = selectedCompany
+        ? __('Selected company', 'give-double-the-donation')
+        : __('Search company', 'give-double-the-donation');
 
-
-    return selectedCompany
-        ? (
-            <CompanyDisplay
-                company={selectedCompany}
-                onChange={handleCompanyDeselect}
-            />
-        ) : (
-            <CompanySearch
-                label={'Search company'} // todo: get actual label
-                text={data.text}
-                companies={data.companies}
-                onChange={handleChange}
-                onSelect={handleCompanySelect}
-            />
-        );
+    return (
+        <CompanySearch
+            selected={selectedCompany?.id}
+            label={label}
+            searchText={data.text}
+            companies={data.companies}
+            onChange={handleChange}
+            onSelect={handleSelect}
+        />
+    );
 };
