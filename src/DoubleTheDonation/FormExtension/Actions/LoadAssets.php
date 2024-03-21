@@ -44,7 +44,15 @@ class LoadAssets
             'GiveDTD',
             [
                 'isApiKeyValid' => $this->api->isKeyValid(),
+                'settingsPage' => admin_url('edit.php?post_type=give_forms&page=give-settings&tab=give-double-the-donation')
             ]
+        );
+
+        wp_enqueue_style(
+            'givewp-form-extension-dtd-block',
+            GIVE_DTD_URL . 'build/block.css',
+            [],
+            $assets['version']
         );
     }
 
@@ -77,7 +85,8 @@ class LoadAssets
             'GiveDTD',
             [
                 'isApiKeyValid' => $this->api->isKeyValid(),
-                'searchEndpoint' => 'https://doublethedonation.com/api/360matchpro-partners/v1/search_by_company_prefix'
+                'searchEndpoint' => 'https://doublethedonation.com/api/360matchpro-partners/v1/search_by_company_prefix',
+                'settingsPage' => admin_url('edit.php?post_type=give_forms&page=give-settings&tab=give-double-the-donation')
             ]
         );
     }
