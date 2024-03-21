@@ -46,7 +46,7 @@ export default ({attributes, setAttributes}) => {
                     <TextControl
                         label={attributes.label}
                         value={null}
-                        onChange={null}
+                        onChange={() => {}}
                     />
                 ) : (
                     <NeedsSetup />
