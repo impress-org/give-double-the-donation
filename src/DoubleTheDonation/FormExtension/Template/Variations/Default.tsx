@@ -74,6 +74,11 @@ export default ({inputProps: {name}, label}) => {
     }, [data.text, donationAmount]);
 
     const handleChange = (text: string) => {
+
+        if (!text) {
+            return;
+        }
+
         setData({
             companies: [],
             text,
