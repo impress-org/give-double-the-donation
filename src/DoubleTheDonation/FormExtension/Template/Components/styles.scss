@@ -40,7 +40,8 @@
                 border-radius: 0.25rem;
             }
 
-            &:hover {
+            &:hover,
+            &.is-selected {
                 background-color: #f7f7f7;
             }
         }
