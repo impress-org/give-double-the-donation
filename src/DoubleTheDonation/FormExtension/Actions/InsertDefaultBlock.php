@@ -12,12 +12,17 @@ class InsertDefaultBlock
 {
     public function __invoke(DonationForm $form)
     {
-        $blockData = json_decode(
-            file_get_contents(GIVE_DTD_DIR . 'src/DoubleTheDonation/FormExtension/Block/block.json'),
-            true
-        );
-
-        $block = BlockModel::make($blockData);
+        $block = BlockModel::make([
+            'name'       => 'givewp/dtd',
+            'attributes' => [
+                'label' => __('See if your company will match your donation', 'give-double-the-donation'),
+                'data'  => [
+                    'company_id'   => '',
+                    'company_name' => '',
+                    'entered_text' => '',
+                ],
+            ],
+        ]);
 
         $form->blocks->insertAfter('givewp/donation-amount', $block);
     }
