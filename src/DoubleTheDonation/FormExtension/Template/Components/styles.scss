@@ -52,6 +52,7 @@
             }
 
             &:hover,
+            &.is-selected,
             &:has(> strong.selected) {
                 background-color: #f7f7f7;
             }
