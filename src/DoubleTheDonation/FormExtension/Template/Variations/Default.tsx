@@ -18,7 +18,7 @@ const initialState = {
 /**
  * @unreleased
  */
-export default ({inputProps: {name}}) => {
+export default ({inputProps: {name}, label}) => {
     // @ts-ignore
     const {useFormContext, useWatch} = window.givewp.form.hooks;
     const {setValue} = useFormContext();
@@ -92,10 +92,6 @@ export default ({inputProps: {name}}) => {
             entered_text,
         });
     };
-
-    const label = selectedCompany
-        ? __('Selected company', 'give-double-the-donation')
-        : __('Search company', 'give-double-the-donation');
 
     return (
         <CompanySearch
