@@ -39,7 +39,7 @@ class ConvertBlockToField
     private function setFieldAttributes(DoubleTheDonationField $field, BlockModel $block): void
     {
         // set props from block attributes
-        $field->setLabel($block->getAttribute('label'));
+        $field->label($block->getAttribute('label'));
     }
 
     /**
