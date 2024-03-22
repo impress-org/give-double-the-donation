@@ -15,8 +15,8 @@ class InsertDefaultBlock
         $block = BlockModel::make([
             'name'       => 'givewp/dtd',
             'attributes' => [
-                'label' => __('See if your company will match your donation', 'give-double-the-donation'),
-                'data'  => [
+                'label'   => __('See if your company will match your donation', 'give-double-the-donation'),
+                'company' => [
                     'company_id'   => '',
                     'company_name' => '',
                     'entered_text' => '',
