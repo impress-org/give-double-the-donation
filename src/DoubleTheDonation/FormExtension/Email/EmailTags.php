@@ -24,9 +24,7 @@ class EmailTags
                     'Matching Company',
                     'give-double-the-donation'
                 ),
-                'func'    => function (array $args) {
-                    return isset($args['payment_id']) ? $this->getCompany($args['payment_id']) : '';
-                },
+                'func'    => [$this, 'handleTag'],
                 'context' => 'dtd',
             ],
             [
@@ -35,12 +33,27 @@ class EmailTags
                     'Matching Company Guidelines',
                     'give-double-the-donation'
                 ),
-                'func'    => function (array $args) {
-                    return isset($args['payment_id']) ? $this->getGuidelines($args['payment_id']) : '';
-                },
+                'func'    => [$this, 'handleTag'],
                 'context' => 'dtd',
             ],
         ]);
+    }
+
+    /**
+     * @unreleased
+     */
+    public function handleTag(array $args, string $tag): string
+    {
+        if (isset($args['payment_id'])) {
+            switch ($tag) {
+                case 'matching_company':
+                    return $this->getCompany($args['payment_id']);
+                case 'matching_company_guidelines':
+                    return $this->getGuidelines($args['payment_id']);
+            }
+        }
+
+        return '';
     }
 
 
@@ -57,8 +70,8 @@ class EmailTags
                 '{matching_company_guidelines}',
             ],
             [
-                '***Matching Company***',
-                '***Matching Company Guidelines***',
+                '***matching-company***',
+                '***matching-company-guidelines***',
             ],
             $template
         );
