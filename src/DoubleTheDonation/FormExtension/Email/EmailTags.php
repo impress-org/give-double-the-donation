@@ -64,7 +64,7 @@ class EmailTags
      */
     public function preview(string $template): string
     {
-        return str_ireplace(
+        return str_replace(
             [
                 '{matching_company}',
                 '{matching_company_guidelines}',
