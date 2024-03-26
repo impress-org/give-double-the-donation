@@ -45,19 +45,15 @@ export default ({inputProps: {name}, label}) => {
                 const companies = await response.json();
 
                 const filteredCompanies = companies.filter((company: CompanyApi) => {
-                    if (company.matching_gift_offered) {
-                        // Check if the company has set a minimum and maximum donation amount
-                        if (company.minimum_matched_amount && company.maximum_matched_amount) {
-                            return (
-                                donationAmount >= company.minimum_matched_amount
-                                && donationAmount <= company.maximum_matched_amount
-                            );
-                        }
-
-                        return true;
+                    // Check if the company has set a minimum and maximum donation amount
+                    if (company.minimum_matched_amount && company.maximum_matched_amount) {
+                        return (
+                            donationAmount >= company.minimum_matched_amount
+                            && donationAmount <= company.maximum_matched_amount
+                        );
                     }
 
-                    return false;
+                    return true;
                 });
 
                 setData({
