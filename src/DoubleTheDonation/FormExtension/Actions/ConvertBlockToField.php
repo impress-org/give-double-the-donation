@@ -20,7 +20,7 @@ class ConvertBlockToField
      */
     public function __invoke(?Node $node, BlockModel $block, int $blockIndex, int $formId): ?Node
     {
-        if ( ! $this->isInPreviewContext() && ! give(DoubleTheDonationApi::class)->isKeyValid()) {
+        if ( ! give(DoubleTheDonationApi::class)->isKeyValid()) {
             return null;
         }
 
@@ -75,15 +75,5 @@ class ConvertBlockToField
                 $data['company_name']
             );
         });
-    }
-
-    /**
-     * Check if form is rendering in preview context
-     *
-     * @unreleased
-     */
-    private function isInPreviewContext(): bool
-    {
-        return isset($_GET['givewp-route']) && $_GET['givewp-route'] === 'donation-form-view-preview';
     }
 }
