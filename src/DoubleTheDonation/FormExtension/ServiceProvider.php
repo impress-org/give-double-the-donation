@@ -5,7 +5,6 @@ namespace GiveDoubleTheDonation\DoubleTheDonation\FormExtension;
 use Give\Helpers\Hooks;
 use Give\ServiceProviders\ServiceProvider as ServiceProviderInterface;
 use GiveDoubleTheDonation\DoubleTheDonation\FormExtension\Actions\ConvertBlockToField;
-use GiveDoubleTheDonation\DoubleTheDonation\FormExtension\Actions\InsertDefaultBlock;
 use GiveDoubleTheDonation\DoubleTheDonation\FormExtension\Actions\LoadAssets;
 
 /**
@@ -27,7 +26,6 @@ class ServiceProvider implements ServiceProviderInterface
     {
         Hooks::addAction('givewp_form_builder_enqueue_scripts', LoadAssets::class, 'formBuilder');
         Hooks::addAction('givewp_donation_form_enqueue_scripts', LoadAssets::class, 'donationForm');
-        Hooks::addAction('givewp_form_builder_new_form', InsertDefaultBlock::class);
 
         Hooks::addFilter('givewp_donation_form_block_render_givewp/dtd', ConvertBlockToField::class, '__invoke', 10, 4);
     }
