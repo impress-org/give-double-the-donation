@@ -36,4 +36,14 @@ class Notices {
 	public static function giveInactive() {
 		echo View::load( 'admin/notices/give-inactive' );
 	}
+
+
+    /**
+     * DTD invalid credentials
+     *
+     * @unreleased
+     */
+    public static function invalidCredentials() {
+        echo View::load( 'admin/notices/credentials-error' );
+    }
 }

@@ -3,7 +3,9 @@
     "description": "Easily integrate with the Double-the-Donation employer matching platform.",
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
-    "require": {},
+    "require": {
+      "ext-json": "*"
+    },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.5",
         "phpcompatibility/phpcompatibility-wp": "^2.1",
@@ -22,6 +24,11 @@
     "autoload": {
         "psr-4": {
             "GiveDoubleTheDonation\\": "src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
         }
     }
 }

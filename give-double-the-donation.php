@@ -15,6 +15,7 @@ namespace GiveDoubleTheDonation;
 use GiveDoubleTheDonation\Addon\Activation;
 use GiveDoubleTheDonation\Addon\Environment;
 use GiveDoubleTheDonation\DoubleTheDonation\AddonServiceProvider;
+use GiveDoubleTheDonation\DoubleTheDonation\FormExtension\ServiceProvider as FormExtensionServiceProvider;
 
 defined( 'ABSPATH' ) or exit;
 
@@ -49,6 +50,7 @@ add_action(
 		// Check Give min required version.
 		if ( Environment::giveMinRequiredVersionCheck() ) {
 			give()->registerServiceProvider( AddonServiceProvider::class );
+			give()->registerServiceProvider( FormExtensionServiceProvider::class );
 		}
 	}
 );

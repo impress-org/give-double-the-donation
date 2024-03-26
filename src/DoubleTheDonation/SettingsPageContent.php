@@ -17,7 +17,7 @@ class SettingsPageContent {
 	 * @since 1.0.0
 	 */
 	public function renderIntro() {
-		$logo_url = GIVE_DTD_URL . '/public/images/dtd-logo.png';
+		$logo_url = GIVE_DTD_URL . '/build/images/dtd-logo.png';
 
 		echo /** @lang HTML */ "
 			<div style='max-width: 600px; margin: 20px 0 25px;'>
