@@ -22,10 +22,10 @@
             "type": "string",
             "default": "See if your company will match your donation"
         },
-        "data": {
+        "company": {
             "type": "object",
             "default": {
-                "id": "",
+                "company_id": "",
                 "company_name": "",
                 "entered_text": ""
             }

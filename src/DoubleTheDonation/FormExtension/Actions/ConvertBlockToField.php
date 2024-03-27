@@ -6,6 +6,8 @@ use Give\Donations\Models\Donation;
 use Give\Framework\Blocks\BlockModel;
 use Give\Framework\FieldsAPI\Contracts\Node;
 use Give\Framework\FieldsAPI\Exceptions\EmptyNameException;
+use GiveDoubleTheDonation\Addon\View;
+use GiveDoubleTheDonation\DoubleTheDonation\FormExtension\Actions\FieldScope\PaymentMeta;
 use GiveDoubleTheDonation\DoubleTheDonation\FormExtension\Field as DoubleTheDonationField;
 use GiveDoubleTheDonation\DoubleTheDonation\Helpers\DoubleTheDonationApi;
 
@@ -25,55 +27,17 @@ class ConvertBlockToField
         }
 
         return DoubleTheDonationField::make('dtd')
+            ->showInReceipt()
+            ->receiptLabel(__('Company Matching', 'give-double-the-donation'))
+            ->receiptValue(function(DoubleTheDonationField $field, Donation $donation) {
+                return View::load('dtd-receipt', [
+                    'donation' => $donation,
+                ]);
+            })
             ->tap(function (DoubleTheDonationField $field) use ($block) {
-                $this->setFieldAttributes($field, $block);
-                $this->handleFieldScope($field);
+                $field
+                    ->label($block->getAttribute('label'))
+                    ->scope((new PaymentMeta)());
             });
-    }
-
-    /**
-     * Set field attributes from block attributes
-     *
-     * @unreleased
-     */
-    private function setFieldAttributes(DoubleTheDonationField $field, BlockModel $block): void
-    {
-        // set props from block attributes
-        $field->label($block->getAttribute('label') ?? '');
-    }
-
-    /**
-     * Handle field scope
-     *
-     * @unreleased
-     */
-    private function handleFieldScope(DoubleTheDonationField $field): void
-    {
-        $field->scope(function (DoubleTheDonationField $field, $data, Donation $donation) {
-            if (empty($data['company_id'])) {
-                return;
-            }
-
-            foreach ($field->getDataAttributeProps() as $name) {
-                give_update_meta(
-                    $donation->id,
-                    $field->getKey($name),
-                    $data[$name]
-                );
-            }
-
-            // Update our core "Company Name" field.
-            give_update_meta(
-                $donation->id,
-                '_give_donation_company',
-                $data['company_name']
-            );
-
-            Give()->donor_meta->update_meta(
-                $donation->donorId,
-                '_give_donor_company',
-                $data['company_name']
-            );
-        });
     }
 }

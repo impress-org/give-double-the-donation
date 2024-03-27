@@ -1,6 +1,5 @@
-import type {Company} from '../types';
+import type {Company, CompanyApi} from '../types';
 import {useEffect, useState} from 'react';
-import {__} from '@wordpress/i18n';
 import {CompanySearch} from '../Components';
 import './styles.scss';
 
@@ -45,16 +44,20 @@ export default ({inputProps: {name}, label}) => {
             if (response.ok) {
                 const companies = await response.json();
 
-                const filteredCompanies = companies.filter((company: Company) => {
-                    // Check if the company has set a minimum and maximum donation amount
-                    if (company.minimum_matched_amount && company.maximum_matched_amount) {
-                        return (
-                            donationAmount >= company.minimum_matched_amount
-                            && donationAmount <= company.maximum_matched_amount
-                        );
+                const filteredCompanies = companies.filter((company: CompanyApi) => {
+                    if (company.matching_gift_offered) {
+                        // Check if the company has set a minimum and maximum donation amount
+                        if (company.minimum_matched_amount && company.maximum_matched_amount) {
+                            return (
+                                donationAmount >= company.minimum_matched_amount
+                                && donationAmount <= company.maximum_matched_amount
+                            );
+                        }
+
+                        return true;
                     }
 
-                    return true;
+                    return false;
                 });
 
                 setData({
@@ -86,9 +89,9 @@ export default ({inputProps: {name}, label}) => {
         }
     };
 
-    const handleSelect = ({id, company_name, entered_text}) => {
+    const handleSelect = ({company_id, company_name, entered_text}: Company) => {
         setValue(name, {
-            id,
+            company_id,
             company_name,
             entered_text,
         });
@@ -96,7 +99,7 @@ export default ({inputProps: {name}, label}) => {
 
     return (
         <CompanySearch
-            selected={selectedCompany?.id}
+            selected={selectedCompany?.company_id}
             label={label}
             searchText={data.text}
             companies={data.companies}

@@ -82,6 +82,41 @@ class DoubleTheDonationApi
 
         return $response->public_key_valid;
     }
+
+    /**
+     * Get company match links
+     *
+     * @unreleased
+     *
+     * return array{company_name: string, url_guidelines: string, url_forms: string, matching_process: string}
+     */
+    public function getCompanyInstructions($companyId): array
+    {
+        if ( ! $this->publicKey || ! $this->privateKey) {
+            return [];
+        }
+
+        $request = wp_remote_get(
+            sprintf(
+                'https://doublethedonation.com/api/360matchpro/v1/companies/%s?key=%s',
+                $companyId,
+                $this->privateKey
+            )
+        );
+
+        if (is_wp_error($request)) {
+            return [];
+        }
+
+        $response = json_decode(wp_remote_retrieve_body($request));
+
+        return [
+            'company_name'     => $response->company_name,
+            'url_guidelines'   => $response->url_guidelines,
+            'url_forms'        => $response->url_guidelines === $response->url_forms ? null : $response->url_forms,
+            'matching_process' => $response->matching_gift_process,
+        ];
+    }
 }
 
 
