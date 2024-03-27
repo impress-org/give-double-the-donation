@@ -1,4 +1,4 @@
-import type {Company, CompanyApi} from '../types';
+import type {Company} from '../types';
 import {useEffect, useState} from 'react';
 import {CompanySearch} from '../Components';
 import './styles.scss';
@@ -23,7 +23,6 @@ export default ({inputProps: {name}, label}) => {
     const {setValue} = useFormContext();
     const [data, setData] = useState(initialState);
 
-    const donationAmount = useWatch({name: 'amount'});
     const selectedCompany: Company = useWatch({name});
 
     useEffect(() => {
@@ -44,21 +43,9 @@ export default ({inputProps: {name}, label}) => {
             if (response.ok) {
                 const companies = await response.json();
 
-                const filteredCompanies = companies.filter((company: CompanyApi) => {
-                    // Check if the company has set a minimum and maximum donation amount
-                    if (company.minimum_matched_amount && company.maximum_matched_amount) {
-                        return (
-                            donationAmount >= company.minimum_matched_amount
-                            && donationAmount <= company.maximum_matched_amount
-                        );
-                    }
-
-                    return true;
-                });
-
                 setData({
                     ...data,
-                    companies: filteredCompanies,
+                    companies,
                 });
             }
 
@@ -66,7 +53,7 @@ export default ({inputProps: {name}, label}) => {
 
         return () => clearTimeout(timeoutId);
 
-    }, [data.text, donationAmount]);
+    }, [data.text]);
 
     const handleChange = (text: string) => {
 
