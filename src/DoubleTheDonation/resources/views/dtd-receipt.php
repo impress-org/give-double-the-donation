@@ -2,7 +2,6 @@
 
 use Give\Donations\Models\Donation;
 use GiveDoubleTheDonation\DoubleTheDonation\Helpers\DoubleTheDonationApi;
-use GiveDoubleTheDonation\DoubleTheDonation\Helpers\Markup;
 
 /**
  * @var Donation $donation
@@ -15,16 +14,18 @@ if (empty($instructions)) {
     return;
 }
 
-if (empty($instructions['url_guidelines']) && empty($instructions['url_forms'])) {
-    if ( ! empty($instructions['matching_process'])) {
-        echo Markup::preformatted($instructions['matching_process']);
-    }
-} else {
-    if ( ! empty($instructions['url_guidelines'])) {
-        echo Markup::anchor($instructions['url_guidelines'], __('Match Guidelines', 'give-double-the-donation'));
-    }
-    if ( ! empty($instructions['url_forms'])) {
-        echo Markup::anchor($instructions['url_forms'], __('Complete the Match', 'give-double-the-donation'));
-    }
+if ( ! empty($instructions['url_guidelines'])) {
+    printf(
+        '<a href="%s" target="_blank">%s</a>',
+        $instructions['url_guidelines'],
+        __('Match Guidelines', 'give-double-the-donation')
+    ) . PHP_EOL;
+}
+if ( ! empty($instructions['url_forms'])) {
+    printf(
+        '<a href="%s" target="_blank">%s</a>',
+        $instructions['url_forms'],
+        __('Complete the Match', 'give-double-the-donation')
+    );
 }
 

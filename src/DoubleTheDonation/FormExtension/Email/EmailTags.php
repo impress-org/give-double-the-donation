@@ -3,7 +3,6 @@
 namespace GiveDoubleTheDonation\DoubleTheDonation\FormExtension\Email;
 
 use GiveDoubleTheDonation\DoubleTheDonation\Helpers\DoubleTheDonationApi;
-use GiveDoubleTheDonation\DoubleTheDonation\Helpers\Markup;
 
 /**
  * @unreleased
@@ -103,19 +102,20 @@ class EmailTags
             return $content;
         }
 
-        // If there is no guidelines or forms url, show the matching process
-        if (empty($instructions['url_guidelines']) && empty($instructions['url_forms'])) {
-            if ( ! empty($instructions['matching_process'])) {
-                return Markup::preformatted($instructions['matching_process']);
-            }
-        }
-
         if ( ! empty($instructions['url_guidelines'])) {
-            $content .= Markup::anchor($instructions['url_guidelines'], __('Match Guidelines', 'give-double-the-donation'));
+            $content .= sprintf(
+                            '<a href="%s" target="_blank">%s</a>',
+                            $instructions['url_guidelines'],
+                            __('Match Guidelines', 'give-double-the-donation')
+                        ) . PHP_EOL;
         }
 
         if ( ! empty($instructions['url_forms'])) {
-            $content .= Markup::anchor($instructions['url_forms'], __('Complete the Match', 'give-double-the-donation'));
+            $content .= sprintf(
+                '<a href="%s" target="_blank">%s</a>',
+                $instructions['url_forms'],
+                __('Complete the Match', 'give-double-the-donation')
+            );
         }
 
         return $content;
