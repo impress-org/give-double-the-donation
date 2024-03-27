@@ -13,4 +13,33 @@
     font-size: 0.875rem;
     font-weight: normal;
     line-height: 1.57;
+
+    a {
+        font-weight: 600;
+        color: #404040;
+        text-decoration: underline;
+    }
+}
+
+.give-dtd-block-notice {
+    background-color: #fffaf2;
+    border-left: 2px solid #f29718;
+    padding: 0.75rem 1rem;
+
+    &-content {
+        padding: 0.5rem 0 0.75rem 0;
+        color: #404040;
+    }
+
+    strong {
+        font-size: 0.8rem;
+        line-height: 1.33;
+        font-weight: 600;
+        color: #0e0e0e;
+    }
+
+    a {
+        color: #0e0e0e;
+        text-decoration: underline;
+    }
 }

@@ -18,7 +18,7 @@ const initialState = {
 /**
  * @unreleased
  */
-export default ({inputProps: {name}}) => {
+export default ({inputProps: {name}, label}) => {
     // @ts-ignore
     const {useFormContext, useWatch} = window.givewp.form.hooks;
     const {setValue} = useFormContext();
@@ -46,19 +46,15 @@ export default ({inputProps: {name}}) => {
                 const companies = await response.json();
 
                 const filteredCompanies = companies.filter((company: Company) => {
-                    if (company.matching_gift_offered) {
-                        // Check if donation amount is in range
-                        if (company.minimum_matched_amount && company.maximum_matched_amount) {
-                            return (
-                                donationAmount >= company.minimum_matched_amount
-                                && donationAmount <= company.maximum_matched_amount
-                            );
-                        }
-
-                        return true;
+                    // Check if the company has set a minimum and maximum donation amount
+                    if (company.minimum_matched_amount && company.maximum_matched_amount) {
+                        return (
+                            donationAmount >= company.minimum_matched_amount
+                            && donationAmount <= company.maximum_matched_amount
+                        );
                     }
 
-                    return false;
+                    return true;
                 });
 
                 setData({
@@ -74,6 +70,11 @@ export default ({inputProps: {name}}) => {
     }, [data.text, donationAmount]);
 
     const handleChange = (text: string) => {
+
+        if (!text) {
+            return;
+        }
+
         setData({
             companies: [],
             text,
@@ -92,10 +93,6 @@ export default ({inputProps: {name}}) => {
             entered_text,
         });
     };
-
-    const label = selectedCompany
-        ? __('Selected company', 'give-double-the-donation')
-        : __('Search company', 'give-double-the-donation');
 
     return (
         <CompanySearch

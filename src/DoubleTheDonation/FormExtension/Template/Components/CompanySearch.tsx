@@ -28,6 +28,7 @@ export default ({label, searchText, onSelect, onChange, companies, selected}) =>
             }}
             options={options}
             onFilterValueChange={onChange}
+            __experimentalRenderItem={({item}) => selected === item.value ? <strong className="selected">{item.label}</strong> : item.label}
         />
     );
 }

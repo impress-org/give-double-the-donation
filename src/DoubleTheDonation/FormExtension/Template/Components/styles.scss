@@ -11,6 +11,17 @@
         margin-left: 5px;
     }
 
+    .components-flex-item::before {
+        position: absolute;
+        color: #8c8c8c;
+        right: 20px;
+        line-height: 1.5;
+        margin-top: -2px;
+        font-size: 26px;
+        content: '⌄';
+        pointer-events: none;
+    }
+
     .components-form-token-field__suggestions-list {
         background-color: #fff;
         position: absolute;
@@ -40,7 +51,9 @@
                 border-radius: 0.25rem;
             }
 
-            &:hover {
+            &:hover,
+            &.is-selected,
+            &:has(> strong.selected) {
                 background-color: #f7f7f7;
             }
         }
