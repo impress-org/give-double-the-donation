@@ -20,7 +20,7 @@ class EmailTags
             [
                 'tag'     => 'matching_company',
                 'desc'    => __(
-                    'Matching Company',
+                    'Double the Donation Matching Company',
                     'give-double-the-donation'
                 ),
                 'func'    => [$this, 'handleTag'],
@@ -29,7 +29,7 @@ class EmailTags
             [
                 'tag'     => 'matching_company_guidelines',
                 'desc'    => __(
-                    'Matching Company Guidelines',
+                    'Double the Donation Matching Company Guidelines',
                     'give-double-the-donation'
                 ),
                 'func'    => [$this, 'handleTag'],
