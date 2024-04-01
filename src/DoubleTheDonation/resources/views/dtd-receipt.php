@@ -7,7 +7,12 @@ use GiveDoubleTheDonation\DoubleTheDonation\Helpers\DoubleTheDonationApi;
  * @var Donation $donation
  */
 
-$companyId    = give_get_meta($donation->id, 'doublethedonation_company_id', true);
+$companyId = give_get_meta($donation->id, 'doublethedonation_company_id', true);
+
+if ( ! $companyId) {
+    return;
+}
+
 $instructions = give(DoubleTheDonationApi::class)->getCompanyInstructions($companyId);
 
 if (empty($instructions)) {

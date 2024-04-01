@@ -33,6 +33,10 @@ class PaymentMeta
      */
     private function isRequiredDataSet($data): bool
     {
+        if ( ! is_array($data)) {
+            return false;
+        }
+
         foreach (['company_id', 'company_name', 'entered_text'] as $name) {
             if ( ! array_key_exists($name, $data)) {
                 return false;
