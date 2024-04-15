@@ -1,0 +1,45 @@
+.give-dtd-block-template {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 24px;
+    padding: 1.5rem 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px 0 #ebebeb;
+    border: dashed 1px #737373;
+    background-color: #fff;
+    font-size: 0.875rem;
+    font-weight: normal;
+    line-height: 1.57;
+
+    a {
+        font-weight: 600;
+        color: #404040;
+        text-decoration: underline;
+    }
+}
+
+.give-dtd-block-notice {
+    background-color: #fffaf2;
+    border-left: 2px solid #f29718;
+    padding: 0.75rem 1rem;
+
+    &-content {
+        padding: 0.5rem 0 0.75rem 0;
+        color: #404040;
+    }
+
+    strong {
+        font-size: 0.8rem;
+        line-height: 1.33;
+        font-weight: 600;
+        color: #0e0e0e;
+    }
+
+    a {
+        color: #0e0e0e;
+        text-decoration: underline;
+    }
+}

@@ -1,0 +1,62 @@
+.give-dtd-company-search {
+    position: relative;
+    margin-left: -5px;
+    margin-right: -5px;
+
+    label {
+        font-size: 1.1rem;
+        font-weight: 500;
+        line-height: 1.5;
+        text-transform: unset;
+        margin-left: 5px;
+    }
+
+    .components-flex-item::before {
+        position: absolute;
+        color: #8c8c8c;
+        right: 20px;
+        line-height: 1.5;
+        margin-top: -2px;
+        font-size: 26px;
+        content: '⌄';
+        pointer-events: none;
+    }
+
+    .components-form-token-field__suggestions-list {
+        background-color: #fff;
+        position: absolute;
+        margin: 25px 5px 0 5px;
+        left: 0;
+        right: 0;
+        list-style: none;
+        padding: 0;
+        z-index: 100;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
+        border-left: 1px solid #e7e7e7;
+        border-right: 1px solid #e7e7e7;
+        border-bottom-left-radius: 0.25rem;
+        border-bottom-right-radius: 0.25rem;
+
+        li {
+            margin: 0;
+            padding: 12px;
+            cursor: pointer;
+            border-bottom: 1px solid #e7e7e7;
+
+            &::marker {
+                content: '';
+            }
+
+            &:last-of-type {
+                border-radius: 0.25rem;
+            }
+
+            &:hover,
+            &.is-selected,
+            &:has(> strong.selected) {
+                background-color: #f7f7f7;
+            }
+        }
+    }
+}
+

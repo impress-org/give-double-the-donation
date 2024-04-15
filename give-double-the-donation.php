@@ -15,6 +15,7 @@ namespace GiveDoubleTheDonation;
 use GiveDoubleTheDonation\Addon\Activation;
 use GiveDoubleTheDonation\Addon\Environment;
 use GiveDoubleTheDonation\DoubleTheDonation\AddonServiceProvider;
+use GiveDoubleTheDonation\DoubleTheDonation\FormExtension\ServiceProvider as FormExtensionServiceProvider;
 
 defined( 'ABSPATH' ) or exit;
 
@@ -23,7 +24,7 @@ define( 'GIVE_DTD_NAME', 'Give - Double the Donation Integration' );
 
 // Versions
 define( 'GIVE_DTD_VERSION', '1.0.1' );
-define( 'GIVE_DTD_MIN_GIVE_VERSION', '2.9.0' );
+define( 'GIVE_DTD_MIN_GIVE_VERSION', '3.7.0' );
 
 // Add-on paths
 define( 'GIVE_DTD_FILE', __FILE__ );
@@ -49,6 +50,7 @@ add_action(
 		// Check Give min required version.
 		if ( Environment::giveMinRequiredVersionCheck() ) {
 			give()->registerServiceProvider( AddonServiceProvider::class );
+			give()->registerServiceProvider( FormExtensionServiceProvider::class );
 		}
 	}
 );

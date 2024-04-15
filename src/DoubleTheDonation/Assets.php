@@ -16,11 +16,13 @@ class Assets {
 	 * @return void
 	 */
 	public static function loadBackendAssets() {
+        $assets = require(GIVE_DTD_DIR . 'build/backend.asset.php');
+
 		wp_enqueue_script(
 			'give-double-the-donation-script-backend',
-			GIVE_DTD_URL . 'public/js/give-double-the-donation-admin.js',
-			[],
-			GIVE_DTD_VERSION,
+            GIVE_DTD_URL . 'build/backend.js',
+            $assets['dependencies'],
+            $assets['version'],
 			true
 		);
 	}
@@ -32,7 +34,11 @@ class Assets {
 	 * @return void
 	 */
 	public static function loadFrontendAssets() {
-		wp_enqueue_script(
+        $assets = require(GIVE_DTD_DIR . 'build/frontend.asset.php');
+
+        $assets['dependencies'][] = 'give-double-the-donation-script';
+
+        wp_enqueue_script(
 			'give-double-the-donation-script',
 			'https://doublethedonation.com/api/js/ddplugin.js',
 			[]
@@ -46,9 +52,9 @@ class Assets {
 
 		wp_enqueue_script(
 			'give-double-the-donation-script-frontend',
-			GIVE_DTD_URL . 'public/js/give-double-the-donation.js',
-			['give-double-the-donation-script'],
-			GIVE_DTD_VERSION,
+            GIVE_DTD_URL . 'build/frontend.js',
+            $assets['dependencies'],
+            $assets['version'],
 			true
 		);
 	}
