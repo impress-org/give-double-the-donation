@@ -9,12 +9,12 @@ use GiveDoubleTheDonation\DoubleTheDonation\FormExtension\Field as DoubleTheDona
 /**
  * Save payment meta - field scope action
  *
- * @unreleased
+ * @since 2.0.0
  */
 class PaymentMeta
 {
     /**
-     * @unreleased
+     * @since 2.0.0
      */
     public function __invoke(): Closure
     {
@@ -29,7 +29,7 @@ class PaymentMeta
     /**
      * Check if company required data is set
      *
-     * @unreleased
+     * @since 2.0.0
      */
     private function isRequiredDataSet($data): bool
     {
@@ -49,7 +49,7 @@ class PaymentMeta
     /**
      * Save payment meta
      *
-     * @unreleased
+     * @since 2.0.0
      */
     private function save(array $companyData, Donation $donation)
     {

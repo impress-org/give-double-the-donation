@@ -12,12 +12,12 @@ use GiveDoubleTheDonation\DoubleTheDonation\FormExtension\Field as DoubleTheDona
 use GiveDoubleTheDonation\DoubleTheDonation\Helpers\DoubleTheDonationApi;
 
 /**
- * @unreleased
+ * @since 2.0.0
  */
 class ConvertBlockToField
 {
     /**
-     * @unreleased
+     * @since 2.0.0
      * @throws EmptyNameException
      */
     public function __invoke(?Node $node, BlockModel $block, int $blockIndex, int $formId): ?Node

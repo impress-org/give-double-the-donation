@@ -7,7 +7,7 @@ use GiveDoubleTheDonation\DoubleTheDonation\Helpers\DoubleTheDonationApi;
 
 /**
  * Action used to check DTD credentials when DTD settings are saved
- * @unreleased
+ * @since 2.0.0
  */
 class CheckCredentials
 {

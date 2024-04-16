@@ -5,14 +5,14 @@ namespace GiveDoubleTheDonation\DoubleTheDonation\FormExtension\Email;
 use GiveDoubleTheDonation\DoubleTheDonation\Helpers\DoubleTheDonationApi;
 
 /**
- * @unreleased
+ * @since 2.0.0
  */
 class EmailTags
 {
     /**
      * Register email tags
      *
-     * @unreleased
+     * @since 2.0.0
      */
     public function register(array $tags): array
     {
@@ -39,7 +39,7 @@ class EmailTags
     }
 
     /**
-     * @unreleased
+     * @since 2.0.0
      */
     public function handleTag(array $args, string $tag): string
     {
@@ -59,7 +59,7 @@ class EmailTags
     /**
      * Add preview placeholders
      *
-     * @unreleased
+     * @since 2.0.0
      */
     public function preview(string $template): string
     {
@@ -79,7 +79,7 @@ class EmailTags
     /**
      * Get matching company name
      *
-     * @unreleased
+     * @since 2.0.0
      */
     public function getCompany($donationId): string
     {
@@ -89,7 +89,7 @@ class EmailTags
     /**
      * Get matching company guidelines
      *
-     * @unreleased
+     * @since 2.0.0
      */
     public function getGuidelines($donationId): string
     {

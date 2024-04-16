@@ -9,7 +9,7 @@ declare const window: {
 } & Window;
 
 /**
- * @unreleased
+ * @since 2.0.0
  */
 export default () => {
     return (

@@ -8,12 +8,12 @@ use GiveDoubleTheDonation\DoubleTheDonation\FormExtension\Field as DoubleTheDona
 /**
  * Action used to check if Company matching field should be displayed on confirmation page
  *
- * @unreleased
+ * @since 2.0.0
  */
 class DisplayFieldLabel
 {
     /**
-     * @unreleased
+     * @since 2.0.0
      */
     public function __invoke(string $label, DoubleTheDonationField $field, Donation $donation): ?string
     {

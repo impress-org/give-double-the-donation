@@ -6,7 +6,7 @@ use Give\Framework\FieldsAPI\Concerns\HasLabel;
 use Give\Framework\FieldsAPI\Field as FieldsApiField;
 
 /**
- * @unreleased
+ * @since 2.0.0
  */
 class Field extends FieldsApiField
 {

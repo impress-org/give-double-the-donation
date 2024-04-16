@@ -6,12 +6,12 @@ use Give\Tests\TestCase;
 use GiveDoubleTheDonation\Addon\Environment;
 
 /**
- * @unreleased
+ * @since 2.0.0
  */
 class TestGiveDoubleTheDonation extends TestCase
 {
     /**
-     * @unreleased
+     * @since 2.0.0
      */
     public function testReadMeVersionMatchesPluginVersion(): void
     {
@@ -22,15 +22,15 @@ class TestGiveDoubleTheDonation extends TestCase
     }
 
     /**
-     * @unreleased
+     * @since 2.0.0
      */
     public function testHasMinimumGiveWPVersion(): void
     {
-        $this->assertSame('3.7.0', GIVE_DTD_MIN_GIVE_VERSION);
+        $this->assertSame('3.8.0', GIVE_DTD_MIN_GIVE_VERSION);
     }
 
     /**
-     * @unreleased
+     * @since 2.0.0
      */
     public function testIsCompatibleWithGiveWP(): void
     {

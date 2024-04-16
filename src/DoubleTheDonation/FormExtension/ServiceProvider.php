@@ -10,7 +10,7 @@ use GiveDoubleTheDonation\DoubleTheDonation\FormExtension\Actions\LoadAssets;
 use GiveDoubleTheDonation\DoubleTheDonation\FormExtension\Email\EmailTags;
 
 /**
- * @unreleased
+ * @since 2.0.0
  */
 class ServiceProvider implements ServiceProviderInterface
 {

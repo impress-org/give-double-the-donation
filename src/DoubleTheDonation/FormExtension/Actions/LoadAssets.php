@@ -5,7 +5,7 @@ namespace GiveDoubleTheDonation\DoubleTheDonation\FormExtension\Actions;
 use GiveDoubleTheDonation\DoubleTheDonation\Helpers\DoubleTheDonationApi;
 
 /**
- * @unreleased
+ * @since 2.0.0
  */
 class LoadAssets
 {
@@ -25,7 +25,7 @@ class LoadAssets
     /**
      * Load Form builder block
      *
-     * @unreleased
+     * @since 2.0.0
      */
     public function formBuilder(): void
     {
@@ -59,7 +59,7 @@ class LoadAssets
     /**
      * Load donation form template
      *
-     * @unreleased
+     * @since 2.0.0
      */
     public function donationForm(): void
     {

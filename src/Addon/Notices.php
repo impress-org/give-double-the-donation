@@ -41,7 +41,7 @@ class Notices {
     /**
      * DTD invalid credentials
      *
-     * @unreleased
+     * @since 2.0.0
      */
     public static function invalidCredentials() {
         echo View::load( 'admin/notices/credentials-error' );

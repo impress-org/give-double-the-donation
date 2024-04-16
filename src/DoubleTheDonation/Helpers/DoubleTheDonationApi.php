@@ -5,14 +5,14 @@ namespace GiveDoubleTheDonation\DoubleTheDonation\Helpers;
 /**
  * Helper class used for handling DTD credentials
  *
- * @unreleased
+ * @since 2.0.0
  */
 class DoubleTheDonationApi
 {
     /**
      * Transient key
      *
-     * @unreleased
+     * @since 2.0.0
      */
     private $key = 'give_dtd_api';
 
@@ -36,7 +36,7 @@ class DoubleTheDonationApi
     }
 
     /**
-     * @unreleased
+     * @since 2.0.0
      */
     public function isKeyValid(): bool
     {
@@ -52,7 +52,7 @@ class DoubleTheDonationApi
     /**
      * Check credentials.
      *
-     * @unreleased
+     * @since 2.0.0
      */
     public function checkKey(): bool
     {
@@ -86,7 +86,7 @@ class DoubleTheDonationApi
     /**
      * Get company match links
      *
-     * @unreleased
+     * @since 2.0.0
      *
      * return array{company_name: string, url_guidelines: string, url_forms: string, matching_process: string}
      */

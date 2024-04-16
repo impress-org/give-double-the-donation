@@ -15,7 +15,7 @@ const initialState = {
 };
 
 /**
- * @unreleased
+ * @since 2.0.0
  */
 export default ({inputProps: {name}, label}) => {
     // @ts-ignore
