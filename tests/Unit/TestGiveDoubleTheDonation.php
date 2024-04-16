@@ -1,6 +1,6 @@
 <?php
 
-namespace GiveConstantContact\Tests;
+namespace GiveDoubleTheDonation\Tests;
 
 use Give\Tests\TestCase;
 use GiveDoubleTheDonation\Addon\Environment;
