@@ -3,13 +3,12 @@
     "description": "Easily integrate with the Double-the-Donation employer matching platform.",
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
-    "require": {},
+    "require": {
+      "ext-json": "*"
+    },
     "require-dev": {
-        "squizlabs/php_codesniffer": "^3.5",
-        "phpcompatibility/phpcompatibility-wp": "^2.1",
-        "wp-coding-standards/wpcs": "^2.3",
-        "phpcompatibility/php-compatibility": "^9.3",
-        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0"
+        "phpunit/phpunit": "^5",
+        "yoast/phpunit-polyfills": "^1.1.0"
     },
     "scripts": {
         "post-install-cmd": [
@@ -17,11 +16,25 @@
         ],
         "install-codestandards": [
             "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run"
-        ]
+        ],
+        "test": "./vendor/bin/phpunit --colors --stop-on-failure"
     },
     "autoload": {
         "psr-4": {
             "GiveDoubleTheDonation\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "GiveDoubleTheDonation\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "platform": {
+            "php": "7.2"
         }
     }
 }
