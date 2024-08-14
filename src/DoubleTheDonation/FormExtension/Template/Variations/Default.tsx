@@ -1,4 +1,5 @@
 import type {Company} from '../types';
+import {__} from '@wordpress/i18n';
 import {useEffect, useState} from 'react';
 import {CompanySearch} from '../Components';
 import './styles.scss';
@@ -79,6 +80,25 @@ export default ({inputProps: {name}, label}) => {
             entered_text,
         });
     };
+
+    if (selectedCompany?.company_name) {
+        return (
+            <div className="give-dtd-company-search">
+                <label>
+                    {label}
+                </label>
+                <div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: 10, padding: 5}}>
+                    {__('Company selected', 'give-double-the-donation')}: <strong>{selectedCompany.company_name}.</strong>
+                    <a
+                        href="#"
+                        onClick={() => setValue(name, null)}
+                    >
+                        {__('Select a different company', 'give-double-the-donation')}
+                    </a>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <CompanySearch
