@@ -1,7 +1,8 @@
 .give-dtd-company-search {
     position: relative;
-    margin-left: -5px;
-    margin-right: -5px;
+    margin: 5px -5px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    box-sizing: border-box;
 
     label {
         font-size: 1.1rem;
@@ -14,10 +15,10 @@
     .components-flex-item::before {
         position: absolute;
         color: #8c8c8c;
+        margin-top: 4px;
         right: 20px;
         line-height: 1.5;
-        margin-top: -2px;
-        font-size: 26px;
+        font-size: 22px;
         content: '⌄';
         pointer-events: none;
     }
