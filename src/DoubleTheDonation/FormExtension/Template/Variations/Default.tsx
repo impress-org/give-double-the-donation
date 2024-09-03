@@ -91,7 +91,10 @@ export default ({inputProps: {name}, label}) => {
                     {__('Company selected', 'give-double-the-donation')}: <strong>{selectedCompany.company_name}.</strong>
                     <a
                         href="#"
-                        onClick={() => setValue(name, null)}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setValue(name, null);
+                        }}
                     >
                         {__('Select a different company', 'give-double-the-donation')}
                     </a>
