@@ -15,10 +15,18 @@ class TestGiveDoubleTheDonation extends TestCase
      */
     public function testReadMeVersionMatchesPluginVersion(): void
     {
-        $readme = file_get_contents( trailingslashit(GIVE_DTD_DIR) . 'readme.txt' );
-        preg_match('/Stable tag:(.*)/i', $readme, $stableTag);
+        $readme = get_file_data(
+            trailingslashit(GIVE_DTD_DIR) . "readme.txt",
+            [
+                "Version" => "Stable tag"
+            ]
+        );
 
-        $this->assertEquals( GIVE_DTD_VERSION, trim($stableTag[1]));
+        $plugin = get_plugin_data(GIVE_DTD_FILE);
+
+        $this->assertEquals(GIVE_DTD_VERSION, $readme['Version']);
+        $this->assertEquals(GIVE_DTD_VERSION, $plugin['Version']);
+        $this->assertEquals($readme['Version'], $plugin['Version']);
     }
 
     /**
@@ -35,5 +43,39 @@ class TestGiveDoubleTheDonation extends TestCase
     public function testIsCompatibleWithGiveWP(): void
     {
         $this->assertTrue(Environment::giveMinRequiredVersionCheck());
+    }
+
+     /**
+     * @since 2.0.0
+     */
+    public function testReadMeRequiresPHPVersionMatchesPluginVersion(): void
+    {
+        $readme = get_file_data(
+            trailingslashit(GIVE_DTD_DIR) . "readme.txt",
+            [
+                "RequiresPHP" => "Requires PHP"
+            ]
+        );
+
+        $plugin = get_plugin_data(GIVE_DTD_FILE);
+
+        $this->assertEquals($plugin['RequiresPHP'], $readme['RequiresPHP']);
+    }
+
+    /**
+     * @since 2.0.0
+     */
+    public function testReadMeRequiresWPVersionMatchesPluginHeaderVersion(): void
+    {
+        $readme = get_file_data(
+            trailingslashit(GIVE_DTD_DIR) . "readme.txt",
+            [
+                "RequiresWP" => "Requires at least"
+            ]
+        );
+
+        $plugin = get_plugin_data(GIVE_DTD_FILE);
+
+        $this->assertEquals($plugin['RequiresWP'], $readme['RequiresWP']);
     }
 }
