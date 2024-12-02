@@ -14,13 +14,29 @@ class Payment {
 	 */
 	public function addPaymentMeta( $payment_id, $payment_data ) {
 
-		$companyID = isset( $_POST['doublethedonation_company_id'] ) ? give_clean( $_POST['doublethedonation_company_id'] ) : '';
+        // v3
+        if (isset($_POST['dtd'])) {
+            $companyID = give_clean($_POST['dtd']['company_id']);
+            $companyName = give_clean($_POST['dtd']['company_name']);
+            $companyEnteredText = give_clean($_POST['dtd']['entered_text']);
+        }
+        // legacy
+        else {
+            $companyID = isset( $_POST['doublethedonation_company_id'] )
+                ? give_clean( $_POST['doublethedonation_company_id'] )
+                : '';
+            $companyName = isset( $_POST['doublethedonation_company_name'] )
+                ? give_clean( $_POST['doublethedonation_company_name'] )
+                : '';
+            $companyEnteredText = isset( $_POST['doublethedonation_entered_text'] )
+                ? give_clean( $_POST['doublethedonation_entered_text'] )
+                : '';
+        }
+
 		if ( ! $companyID ) {
 			return false;
 		}
 
-		$companyName         = isset( $_POST['doublethedonation_company_name'] ) ? give_clean( $_POST['doublethedonation_company_name'] ) : '';
-		$companyEnteredText = isset( $_POST['doublethedonation_entered_text'] ) ? give_clean( $_POST['doublethedonation_entered_text'] ) : '';
 
 		give_update_meta( $payment_id, 'doublethedonation_company_id', $companyID );
 		give_update_meta( $payment_id, 'doublethedonation_company_name', $companyName );
@@ -69,7 +85,7 @@ class Payment {
 			$data_360['doublethedonation_company_id'] = $companyID;
 		}
 
-		$companyEnteredText = isset( $paymentMeta['doublethedonation_company_id'] ) ? $paymentMeta['doublethedonation_company_id'] : '';
+		$companyEnteredText = isset( $paymentMeta['doublethedonation_entered_text'] ) ? $paymentMeta['doublethedonation_entered_text'] : '';
 		if ( $companyEnteredText ) {
 			$data_360['doublethedonation_entered_text'] = $companyEnteredText;
 		}
