@@ -14,24 +14,20 @@ class Payment {
 	 */
 	public function addPaymentMeta( $payment_id, $payment_data ) {
 
-        // v3
+        // v3 form will send the dtd field so we don't have to bother with saving meta as the field scope will take care of this
         if (isset($_POST['dtd'])) {
-            $companyID = give_clean($_POST['dtd']['company_id']);
-            $companyName = give_clean($_POST['dtd']['company_name']);
-            $companyEnteredText = give_clean($_POST['dtd']['entered_text']);
+            return false;
         }
-        // legacy
-        else {
-            $companyID = isset( $_POST['doublethedonation_company_id'] )
-                ? give_clean( $_POST['doublethedonation_company_id'] )
-                : '';
-            $companyName = isset( $_POST['doublethedonation_company_name'] )
-                ? give_clean( $_POST['doublethedonation_company_name'] )
-                : '';
-            $companyEnteredText = isset( $_POST['doublethedonation_entered_text'] )
-                ? give_clean( $_POST['doublethedonation_entered_text'] )
-                : '';
-        }
+
+        $companyID = isset( $_POST['doublethedonation_company_id'] )
+            ? give_clean( $_POST['doublethedonation_company_id'] )
+            : '';
+        $companyName = isset( $_POST['doublethedonation_company_name'] )
+            ? give_clean( $_POST['doublethedonation_company_name'] )
+            : '';
+        $companyEnteredText = isset( $_POST['doublethedonation_entered_text'] )
+            ? give_clean( $_POST['doublethedonation_entered_text'] )
+            : '';
 
 		if ( ! $companyID ) {
 			return false;
