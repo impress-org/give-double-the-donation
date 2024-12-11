@@ -37,8 +37,11 @@ class AddonServiceProvider implements ServiceProvider
         Hooks::addAction('init', Language::class, 'load');
         Hooks::addAction('give_donation_form_after_email', DonationForm::class, 'employerMatchField');
 
-        Hooks::addAction('give_insert_payment', Payment::class, 'addPaymentMeta', 10, 2);
-        Hooks::addAction('give_insert_payment', Payment::class, 'addDonationToDTD', 11, 2);
+        // handle v2 forms stuff
+        if (isset($_POST) && ! isset($_POST['dtd'])) {
+            Hooks::addAction('give_insert_payment', Payment::class, 'addPaymentMeta', 10, 2);
+            Hooks::addAction('give_insert_payment', Payment::class, 'addDonationToDTD', 11, 2);
+        }
 
         // Show Receipt info
         Hooks::addAction('give_payment_receipt_after', UpdateDonationReceipt::class, 'renderLegacyRow', 10, 2);

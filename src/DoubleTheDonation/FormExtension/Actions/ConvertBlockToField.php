@@ -7,7 +7,7 @@ use Give\Framework\Blocks\BlockModel;
 use Give\Framework\FieldsAPI\Contracts\Node;
 use Give\Framework\FieldsAPI\Exceptions\EmptyNameException;
 use GiveDoubleTheDonation\Addon\View;
-use GiveDoubleTheDonation\DoubleTheDonation\FormExtension\Actions\FieldScope\PaymentMeta;
+use GiveDoubleTheDonation\DoubleTheDonation\FormExtension\Actions\FieldScope\HandleData;
 use GiveDoubleTheDonation\DoubleTheDonation\FormExtension\Field as DoubleTheDonationField;
 use GiveDoubleTheDonation\DoubleTheDonation\Helpers\DoubleTheDonationApi;
 
@@ -37,7 +37,7 @@ class ConvertBlockToField
             ->tap(function (DoubleTheDonationField $field) use ($block) {
                 $field
                     ->label($block->getAttribute('label'))
-                    ->scope((new PaymentMeta)());
+                    ->scope((new HandleData)());
             });
     }
 }

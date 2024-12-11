@@ -14,11 +14,6 @@ class Payment {
 	 */
 	public function addPaymentMeta( $payment_id, $payment_data ) {
 
-        // v3 form will send the dtd field so we don't have to bother with saving meta as the field scope will take care of this
-        if (isset($_POST['dtd'])) {
-            return false;
-        }
-
         $companyID = isset( $_POST['doublethedonation_company_id'] )
             ? give_clean( $_POST['doublethedonation_company_id'] )
             : '';
