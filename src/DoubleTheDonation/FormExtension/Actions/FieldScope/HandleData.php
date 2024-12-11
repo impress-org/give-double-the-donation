@@ -4,6 +4,7 @@ namespace GiveDoubleTheDonation\DoubleTheDonation\FormExtension\Actions\FieldSco
 
 use Closure;
 use Give\Donations\Models\Donation;
+use Give\Donations\Models\DonationNote;
 use Give\Log\Log;
 use GiveDoubleTheDonation\DoubleTheDonation\FormExtension\Field as DoubleTheDonationField;
 
@@ -125,7 +126,9 @@ class HandleData
             return;
         }
 
-        $note = esc_html__('Donation information added to Double the Donation 360MatchPro', 'give-double-the-donation');
-        give_insert_payment_note($donation->id, $note);
+        DonationNote::create([
+            'donationId' => $donation->id,
+            'content' => esc_html__('Donation information added to Double the Donation 360MatchPro', 'give-double-the-donation')
+        ]);
     }
 }
