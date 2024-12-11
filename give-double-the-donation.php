@@ -3,7 +3,7 @@
  * Plugin Name: Give - Double the Donation
  * Plugin URI:  https://givewp.com/addons/give-double-the-donation/
  * Description: Easily integrate with the Double the Donation employer matching platform.
- * Version:     2.0.1
+ * Version:     2.0.2
  * Author:      GiveWP
  * Requires at least: 6.3
  * Requires PHP: 7.2
@@ -25,7 +25,7 @@ defined( 'ABSPATH' ) or exit;
 define( 'GIVE_DTD_NAME', 'Give - Double the Donation Integration' );
 
 // Versions
-define( 'GIVE_DTD_VERSION', '2.0.1' );
+define( 'GIVE_DTD_VERSION', '2.0.2' );
 define( 'GIVE_DTD_MIN_GIVE_VERSION', '3.8.0' );
 
 // Add-on paths

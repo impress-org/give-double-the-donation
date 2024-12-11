@@ -3,9 +3,9 @@ Contributors: givewp, dlocc, webdevmattcrom, jason_the_adams
 Donate link: https://givewp.com/
 Tags: givewp, double the donation, employer matching, company matching donation, employer matching donations
 Requires at least: 6.3
-Tested up to: 6.6
+Tested up to: 6.7
 Requires PHP: 7.2
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 Requires Give: 3.8.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -69,6 +69,9 @@ Your company will get an email and you will as well with next steps to follow. I
 3. Each form can be enabled/disabled and the company matching field label customized for your needs.
 
 == Changelog ==
+
+= 2.0.2: December 11th, 2024 =
+* Fix: Resolved an issue where the company ID was not being sent to 360MatchPro
 
 = 2.0.1: September 4th, 2024 =
 * Fix: Added the “Select a different company” text back to the company selector, which appears when a company has already been selected.

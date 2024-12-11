@@ -11,7 +11,7 @@ use GiveDoubleTheDonation\DoubleTheDonation\FormExtension\Field as DoubleTheDona
 /**
  * Save payment meta and send data to DTD 360
  *
- * @unreleased send data to DTD 360match pro
+ * @since 2.0.2 send data to DTD 360match pro
  * @since      2.0.0
  */
 class HandleData
@@ -81,7 +81,7 @@ class HandleData
     /**
      * Send data to DTD 360match pro
      *
-     * @unreleased
+     * @since 2.0.2
      */
     private function send(array $companyData, Donation $donation): void
     {
