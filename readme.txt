@@ -70,7 +70,7 @@ Your company will get an email and you will as well with next steps to follow. I
 
 == Changelog ==
 
-= 2.0.2: December 11th, 2024 =
+= 2.0.2: December 12th, 2024 =
 * Fix: Resolved an issue where the company ID was not being sent to 360MatchPro
 
 = 2.0.1: September 4th, 2024 =
