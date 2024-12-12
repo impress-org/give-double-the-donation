@@ -21,14 +21,14 @@ if (empty($instructions)) {
 
 if ( ! empty($instructions['url_guidelines'])) {
     printf(
-        '<a href="%s" target="_blank">%s</a>',
+        '<p style="margin-bottom: 0;"><a href="%s" target="_blank">%s</a></p>',
         $instructions['url_guidelines'],
         __('Match Guidelines', 'give-double-the-donation')
     ) . PHP_EOL;
 }
 if ( ! empty($instructions['url_forms'])) {
     printf(
-        '<a href="%s" target="_blank">%s</a>',
+        '<p style="margin-bottom: 0;"><a href="%s" target="_blank">%s</a></p>',
         $instructions['url_forms'],
         __('Complete the Match', 'give-double-the-donation')
     );
