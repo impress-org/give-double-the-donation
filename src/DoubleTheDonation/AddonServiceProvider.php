@@ -43,6 +43,9 @@ class AddonServiceProvider implements ServiceProvider
             Hooks::addAction('give_insert_payment', Payment::class, 'addDonationToDTD', 11, 2);
         }
 
+        // Recurring
+        Hooks::addAction('give_recurring_record_payment', Payment::class, 'addDonationToDTD', 10, 2);
+
         // Show Receipt info
         Hooks::addAction('give_payment_receipt_after', UpdateDonationReceipt::class, 'renderLegacyRow', 10, 2);
         Hooks::addAction('give_new_receipt', UpdateDonationReceipt::class, 'renderRowSequoiaTemplate');
