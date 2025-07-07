@@ -43,7 +43,9 @@ class AddonServiceProvider implements ServiceProvider
             Hooks::addAction('give_insert_payment', Payment::class, 'addDonationToDTD', 11, 2);
         }
 
-        // Recurring
+        /**
+         * @unreleased add support for recurring donations
+         */
         Hooks::addAction('give_recurring_record_payment', Payment::class, 'addDonationToDTD', 10, 2);
 
         // Show Receipt info
