@@ -68,7 +68,7 @@ class Assets
      */
     public function loadReceiptScripts()
     {
-        if (!$dtdPublicKey = give_get_option('public_dtd_key')) {
+        if ($dtdPublicKey = give_get_option('public_dtd_key')) {
             $this->loadFrontendAssets();
 
             wp_register_script('givewp-dtd-receipt-script', null);
