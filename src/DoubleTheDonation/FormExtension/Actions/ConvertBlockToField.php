@@ -2,11 +2,9 @@
 
 namespace GiveDoubleTheDonation\DoubleTheDonation\FormExtension\Actions;
 
-use Give\Donations\Models\Donation;
 use Give\Framework\Blocks\BlockModel;
 use Give\Framework\FieldsAPI\Contracts\Node;
 use Give\Framework\FieldsAPI\Exceptions\EmptyNameException;
-use GiveDoubleTheDonation\Addon\View;
 use GiveDoubleTheDonation\DoubleTheDonation\FormExtension\Actions\FieldScope\HandleData;
 use GiveDoubleTheDonation\DoubleTheDonation\FormExtension\Field as DoubleTheDonationField;
 use GiveDoubleTheDonation\DoubleTheDonation\Helpers\DoubleTheDonationApi;
@@ -29,11 +27,6 @@ class ConvertBlockToField
         return DoubleTheDonationField::make('dtd')
             ->showInReceipt()
             ->receiptLabel(__('Company Matching', 'give-double-the-donation'))
-            ->receiptValue(function(DoubleTheDonationField $field, Donation $donation) {
-                return View::load('dtd-receipt', [
-                    'donation' => $donation,
-                ]);
-            })
             ->tap(function (DoubleTheDonationField $field) use ($block) {
                 $field
                     ->label($block->getAttribute('label'))

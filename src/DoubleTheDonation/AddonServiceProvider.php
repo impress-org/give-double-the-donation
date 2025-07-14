@@ -9,6 +9,7 @@ use GiveDoubleTheDonation\Addon\ActivationBanner;
 use GiveDoubleTheDonation\Addon\Language;
 use GiveDoubleTheDonation\Addon\License;
 use GiveDoubleTheDonation\DoubleTheDonation\Actions\CheckCredentials;
+use GiveDoubleTheDonation\DoubleTheDonation\API\REST\CompanyMatching;
 use GiveDoubleTheDonation\DoubleTheDonation\Helpers\SettingsPage as SettingsPageRegister;
 
 /**
@@ -88,7 +89,11 @@ class AddonServiceProvider implements ServiceProvider
      */
     private function loadFrontend()
     {
+        // @unreleased
+        Hooks::addAction('rest_api_init', CompanyMatching::class);
+
         // Load front-end assets.
         Hooks::addAction('wp_enqueue_scripts', Assets::class, 'loadFrontendAssets');
+        Hooks::addAction('givewp_donation_confirmation_receipt_showing', Assets::class, 'loadReceiptScripts');
     }
 }

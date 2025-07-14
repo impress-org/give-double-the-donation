@@ -10,6 +10,7 @@ use GiveDoubleTheDonation\DoubleTheDonation\Helpers\DoubleTheDonationApi;
 $companyId = give_get_meta($donation->id, 'doublethedonation_company_id', true);
 
 if ( ! $companyId) {
+    printf('<div class="dd-company-name-input" data-donation-id="%s"></div>', $donation->id);
     return;
 }
 

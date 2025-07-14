@@ -53,9 +53,10 @@ class HandleData
     /**
      * Save payment meta
      *
+     * @unreleased update visibility
      * @since 2.0.0
      */
-    private function save(array $companyData, Donation $donation)
+    public function save(array $companyData, Donation $donation)
     {
         foreach ($companyData as $name => $value) {
             give_update_meta(
@@ -81,9 +82,10 @@ class HandleData
     /**
      * Send data to DTD 360match pro
      *
+     * @unreleased update visibility
      * @since 2.0.2
      */
-    private function send(array $companyData, Donation $donation): void
+    public function send(array $companyData, Donation $donation): void
     {
         if ( ! $dtdPublicKey = give_get_option('public_dtd_key')) {
             return;
@@ -130,5 +132,36 @@ class HandleData
             'donationId' => $donation->id,
             'content' => esc_html__('Donation information added to Double the Donation 360MatchPro', 'give-double-the-donation')
         ]);
+    }
+
+    /**
+     * Remove payment meta added on donation confirmation page
+     *
+     * @unreleased
+     */
+    public function remove(Donation $donation)
+    {
+        $fields = [
+            'company_id',
+            'company_name',
+            'entered_text'
+        ];
+
+        foreach ($fields as $name => $value) {
+            give_delete_meta(
+                $donation->id,
+                'doublethedonation_' . $name,
+            );
+        }
+
+        give_delete_meta(
+            $donation->id,
+            '_give_donation_company',
+        );
+
+        give()->donor_meta->delete_meta(
+            $donation->donorId,
+            '_give_donor_company',
+        );
     }
 }
