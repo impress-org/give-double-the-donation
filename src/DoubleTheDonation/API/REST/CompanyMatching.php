@@ -24,7 +24,7 @@ class CompanyMatching
                         $data = [
                             'company_id' => $request->get_param('companyId'),
                             'company_name' => $request->get_param('companyName'),
-                            'entered_text' => $request->get_param('enteredText')
+                            'entered_text' => $request->get_param('enteredText'),
                         ];
 
                         $donation = Donation::find($request->get_param('id'));
@@ -33,25 +33,23 @@ class CompanyMatching
                         $donationHandler->save($data, $donation);
                         $donationHandler->send($data, $donation);
                     },
-                    'permission_callback' => function(WP_REST_Request $request) {
-                        return (bool)give()->donations->getByReceiptId($request->get_param('receiptId'));
-                    },
+                    'permission_callback' => [$this, 'permissionCheck'],
                 ],
                 'args' => [
                     'companyId' => [
                         'type' => 'string',
                         'required' => true,
-                        'format' => 'text-field'
+                        'format' => 'text-field',
                     ],
                     'companyName' => [
                         'type' => 'string',
                         'required' => true,
-                        'format' => 'text-field'
+                        'format' => 'text-field',
                     ],
                     'enteredText' => [
                         'type' => 'string',
                         'required' => true,
-                        'format' => 'text-field'
+                        'format' => 'text-field',
                     ],
                     'receiptId' => [
                         'type' => 'string',
@@ -72,17 +70,31 @@ class CompanyMatching
                         $donationHandler = new HandleData();
                         $donationHandler->remove($donation);
                     },
-                    'permission_callback' => function(WP_REST_Request $request) {
-                        return (bool)give()->donations->getByReceiptId($request->get_param('receiptId'));
-                    },
+                    'permission_callback' => [$this, 'permissionCheck'],
                 ],
                 'args' => [
                     'receiptId' => [
                         'type' => 'string',
                         'required' => true,
-                    ]
+                    ],
                 ],
             ]
         );
+    }
+
+    /**
+     * @unreleased
+     */
+    public function permissionCheck(WP_REST_Request $request): bool
+    {
+        $receiptId = $request->get_param('receiptId');
+        $donationId = $request->get_param('id');
+        $donation = give()->donations->getByReceiptId($receiptId);
+
+        if ( ! $donation) {
+            return false;
+        }
+
+        return $donation->id === $donationId;
     }
 }
