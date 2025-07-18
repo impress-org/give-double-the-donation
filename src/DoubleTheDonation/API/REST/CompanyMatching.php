@@ -39,14 +39,17 @@ class CompanyMatching
                     'companyId' => [
                         'type' => 'string',
                         'required' => true,
+                        'format' => 'text-field'
                     ],
                     'companyName' => [
                         'type' => 'string',
-                        'required' => true
+                        'required' => true,
+                        'format' => 'text-field'
                     ],
                     'enteredText' => [
                         'type' => 'string',
-                        'required' => true
+                        'required' => true,
+                        'format' => 'text-field'
                     ],
                 ],
             ]
