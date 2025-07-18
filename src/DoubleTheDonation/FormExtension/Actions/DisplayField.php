@@ -21,6 +21,7 @@ class DisplayField
     {
         return View::load('dtd-receipt', [
             'donation' => $donation,
+            'receiptId' => $_GET['receipt-id'] ?? null
         ]);
     }
 }

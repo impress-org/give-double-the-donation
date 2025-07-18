@@ -33,7 +33,9 @@ class CompanyMatching
                         $donationHandler->save($data, $donation);
                         $donationHandler->send($data, $donation);
                     },
-                    'permission_callback' => '__return_true',
+                    'permission_callback' => function(WP_REST_Request $request) {
+                        return (bool)give()->donations->getByReceiptId($request->get_param('receiptId'));
+                    },
                 ],
                 'args' => [
                     'companyId' => [
@@ -51,6 +53,10 @@ class CompanyMatching
                         'required' => true,
                         'format' => 'text-field'
                     ],
+                    'receiptId' => [
+                        'type' => 'string',
+                        'required' => true,
+                    ],
                 ],
             ]
         );
@@ -66,9 +72,16 @@ class CompanyMatching
                         $donationHandler = new HandleData();
                         $donationHandler->remove($donation);
                     },
-                    'permission_callback' => '__return_true',
+                    'permission_callback' => function(WP_REST_Request $request) {
+                        return (bool)give()->donations->getByReceiptId($request->get_param('receiptId'));
+                    },
                 ],
-                'args' => [],
+                'args' => [
+                    'receiptId' => [
+                        'type' => 'string',
+                        'required' => true,
+                    ]
+                ],
             ]
         );
     }

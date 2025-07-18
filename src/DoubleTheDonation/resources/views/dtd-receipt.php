@@ -5,12 +5,13 @@ use GiveDoubleTheDonation\DoubleTheDonation\Helpers\DoubleTheDonationApi;
 
 /**
  * @var Donation $donation
+ * @var string $receiptId
  */
 
 $companyId = give_get_meta($donation->id, 'doublethedonation_company_id', true);
 
 if ( ! $companyId) {
-    printf('<div class="dd-company-name-input" data-donation-id="%s"></div>', $donation->id);
+    printf('<div class="dd-company-name-input" data-donation-id="%s" data-receipt-id="%s"></div>', $donation->id, $receiptId);
     return;
 }
 
