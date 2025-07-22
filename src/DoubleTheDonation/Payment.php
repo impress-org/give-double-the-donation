@@ -2,6 +2,8 @@
 
 namespace GiveDoubleTheDonation\DoubleTheDonation;
 
+use Give\Donations\Models\Donation;
+
 class Payment {
 
 	/**
@@ -51,7 +53,6 @@ class Payment {
 	 * @return false|mixed
 	 */
 	public function addDonationToDTD( $payment_id, $payment_data ) {
-
 		// API Key check
 		$dtdPublicKey = give_get_option( 'public_dtd_key', false );
 		if ( ! $dtdPublicKey ) {
