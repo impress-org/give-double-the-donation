@@ -36,6 +36,10 @@ class CompanyMatching
                     'permission_callback' => [$this, 'permissionCheck'],
                 ],
                 'args' => [
+                    'id' => [
+                        'type' => 'integer',
+                        'required' => true,
+                    ],
                     'companyId' => [
                         'type' => 'string',
                         'required' => true,
@@ -73,6 +77,10 @@ class CompanyMatching
                     'permission_callback' => [$this, 'permissionCheck'],
                 ],
                 'args' => [
+                    'id' => [
+                        'type' => 'integer',
+                        'required' => true,
+                    ],
                     'receiptId' => [
                         'type' => 'string',
                         'required' => true,
@@ -95,6 +103,6 @@ class CompanyMatching
             return false;
         }
 
-        return $donation->id == $donationId;
+        return $donation->id === $donationId;
     }
 }
