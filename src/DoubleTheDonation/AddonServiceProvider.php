@@ -39,18 +39,24 @@ class AddonServiceProvider implements ServiceProvider
         Hooks::addAction('init', Language::class, 'load');
         Hooks::addAction('give_donation_form_after_email', DonationForm::class, 'employerMatchField');
 
-        // handle v2 forms stuff
-        if (isset($_POST) && ! isset($_POST['dtd'])) {
-            Hooks::addAction('give_insert_payment', Payment::class, 'addPaymentMeta', 10, 2);
-        }
-
         add_action('give_insert_payment', function($payment_id, $payment_data) {
-            $donation = Donation::find((int)$payment_id);
+            // handle for v2 forms (v3 forms uses field scope)
+            if (isset($_POST) && !isset($_POST['dtd'])) {
+                give(Payment::class)->addPaymentMeta($payment_id, $payment_data);
 
-            if ($donation->type->isSingle()){
-                give(Payment::class)->addDonationToDTD($payment_id, $payment_data);
+                $donation = Donation::find((int)$payment_id);
+
+                // handle for single donations only
+                if ($donation->type->isSingle()) {
+                    give(Payment::class)->addDonationToDTD($payment_id, $payment_data);
+                }
             }
         });
+
+        /**
+         * @unreleased add support for recurring donations
+         */
+        Hooks::addAction('give_recurring_record_payment', Payment::class, 'addDonationToDTD', 10, 2);
 
         // Show Receipt info
         Hooks::addAction('give_payment_receipt_after', UpdateDonationReceipt::class, 'renderLegacyRow', 10, 2);
