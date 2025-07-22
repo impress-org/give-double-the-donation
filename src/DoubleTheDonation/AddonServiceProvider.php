@@ -2,6 +2,7 @@
 
 namespace GiveDoubleTheDonation\DoubleTheDonation;
 
+use Give\Donations\Models\Donation;
 use Give\Helpers\Hooks;
 use Give\ServiceProviders\ServiceProvider;
 use GiveDoubleTheDonation\Addon\Activation;
@@ -41,8 +42,15 @@ class AddonServiceProvider implements ServiceProvider
         // handle v2 forms stuff
         if (isset($_POST) && ! isset($_POST['dtd'])) {
             Hooks::addAction('give_insert_payment', Payment::class, 'addPaymentMeta', 10, 2);
-            Hooks::addAction('give_insert_payment', Payment::class, 'addDonationToDTD', 11, 2);
         }
+
+        add_action('give_insert_payment', function($payment_id, $payment_data) {
+            $donation = Donation::find((int)$payment_id);
+
+            if ($donation->type->isSingle()){
+                give(Payment::class)->addDonationToDTD($payment_id, $payment_data);
+            }
+        });
 
         // Show Receipt info
         Hooks::addAction('give_payment_receipt_after', UpdateDonationReceipt::class, 'renderLegacyRow', 10, 2);

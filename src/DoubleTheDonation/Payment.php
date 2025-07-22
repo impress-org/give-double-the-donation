@@ -53,13 +53,6 @@ class Payment {
 	 * @return false|mixed
 	 */
 	public function addDonationToDTD( $payment_id, $payment_data ) {
-
-        $donation = Donation::find($payment_id);
-
-        if ($donation->subscriptionId) {
-            return false;
-        }
-
 		// API Key check
 		$dtdPublicKey = give_get_option( 'public_dtd_key', false );
 		if ( ! $dtdPublicKey ) {
