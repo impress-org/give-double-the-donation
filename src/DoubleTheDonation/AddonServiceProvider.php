@@ -103,7 +103,7 @@ class AddonServiceProvider implements ServiceProvider
      */
     private function loadFrontend()
     {
-        // @unreleased
+        // @since 2.1.0
         Hooks::addAction('rest_api_init', CompanyMatching::class);
 
         // Load front-end assets.

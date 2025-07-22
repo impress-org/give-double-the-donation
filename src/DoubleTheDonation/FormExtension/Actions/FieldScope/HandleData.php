@@ -53,7 +53,7 @@ class HandleData
     /**
      * Save payment meta
      *
-     * @unreleased update visibility
+     * @since 2.1.0 update visibility
      * @since 2.0.0
      */
     public function save(array $companyData, Donation $donation)
@@ -82,7 +82,7 @@ class HandleData
     /**
      * Send data to DTD 360match pro
      *
-     * @unreleased update visibility
+     * @since 2.1.0 update visibility
      * @since 2.0.2
      */
     public function send(array $companyData, Donation $donation): void
@@ -137,7 +137,7 @@ class HandleData
     /**
      * Remove payment meta added on donation confirmation page
      *
-     * @unreleased
+     * @since 2.1.0
      */
     public function remove(Donation $donation)
     {

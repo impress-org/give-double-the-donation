@@ -9,13 +9,13 @@ use GiveDoubleTheDonation\DoubleTheDonation\FormExtension\Field as DoubleTheDona
 /**
  * Action used to displayed DTD Company Matching value/input on confirmation page
  *
- * @unreleased renamed to DisplayField
+ * @since 2.1.0 renamed to DisplayField
  * @since 2.0.0
  */
 class DisplayField
 {
     /**
-     * @unreleased
+     * @since 2.1.0
      */
     public function value(?string $value, DoubleTheDonationField $field, Donation $donation): ?string
     {

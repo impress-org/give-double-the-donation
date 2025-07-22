@@ -8,7 +8,7 @@ use WP_REST_Request;
 use WP_REST_Server;
 
 /**
- * @unreleased
+ * @since 2.1.0
  */
 class CompanyMatching
 {
@@ -91,7 +91,7 @@ class CompanyMatching
     }
 
     /**
-     * @unreleased
+     * @since 2.1.0
      */
     public function permissionCheck(WP_REST_Request $request): bool
     {
