@@ -2,10 +2,10 @@
 Contributors: givewp, dlocc, webdevmattcrom, jason_the_adams
 Donate link: https://givewp.com/
 Tags: givewp, double the donation, employer matching, company matching donation, employer matching donations
-Requires at least: 6.3
-Tested up to: 6.7
+Requires at least: 6.6
+Tested up to: 6.8
 Requires PHP: 7.2
-Stable tag: 2.0.2
+Stable tag: 2.1.0
 Requires Give: 3.8.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -16,10 +16,10 @@ Empower your GiveWP donors to have their company match their donations with the 
 
 Empower your GiveWP donors to have their company match their donations with the most powerful Company Matching platform: Double the Donation.
 
-With this GiveWP add-on, simply add your Double the Donation API keys into the settings, then each of your forms can be enabled to accept company matching. 
+With this GiveWP add-on, simply add your Double the Donation API keys into the settings, then each of your forms can be enabled to accept company matching.
 
 **ABOUT DOUBLE THE DONATION:**
-Automate your matching gift fundraising with the industry-leading solution from Double the Donation. Double the Donation provides nonprofits with tools to identify match-eligible donors, drive matches to completion, and gain actionable insights. Our unique integration with GiveWP integrates directly into your donation forms, to capture employment information and follow up appropriately with donors about matching gifts. 
+Automate your matching gift fundraising with the industry-leading solution from Double the Donation. Double the Donation provides nonprofits with tools to identify match-eligible donors, drive matches to completion, and gain actionable insights. Our unique integration with GiveWP integrates directly into your donation forms, to capture employment information and follow up appropriately with donors about matching gifts.
 
 **ABOUT OUR FREE ADD-ONS**
 Add-ons like "GiveWP -- Double the Donation" are a way that we are giving back to the WordPress community.
@@ -30,8 +30,8 @@ Add-ons like "GiveWP -- Double the Donation" are a way that we are giving back t
 
 = Minimum Requirements =
 
-* An active subscription to Double the Donation. 
-* WordPress 6.3 or greater
+* An active subscription to Double the Donation.
+* WordPress 6.6 or greater
 * PHP version 7.2 or greater
 * MySQL version 5.7 or greater
 
@@ -57,18 +57,22 @@ Automatic updates should work like a charm; as always though, ensure you backup 
 = My company doesn't appear in the company matching drop-down. =
 The companies listed in the Double the Donation dropdown all registered with Double the Donation to provide their employees this opportunity. If your company does not appear there, then most likely they have not yet applied with Double the Donation. You can submit on their behalf, or [send them here to apply](https://doublethedonation.com/matching-gift-database/new-companies-with-matching-gift-programs/).
 
-= I set my company to match, what happens next? = 
+= I set my company to match, what happens next? =
 Your company will get an email and you will as well with next steps to follow. If you have any trouble with this process, contact [Double the Donation directly here](https://support.doublethedonation.com/portal/en/home).
 
-== Screenshots == 
+== Screenshots ==
 
-1. The company search is powered by Double the Donation. It's fast and intuitive for your donors. 
+1. The company search is powered by Double the Donation. It's fast and intuitive for your donors.
 
 2. Integrating Double the Donation with GiveWP is as simple as inserting your API keys in the settings fields.
 
 3. Each form can be enabled/disabled and the company matching field label customized for your needs.
 
 == Changelog ==
+
+= 2.1.0: July 23rd, 2025 =
+* New: Added compatibility with recurring donations
+* New: Added additional company match field to the donation confirmation page
 
 = 2.0.2: December 12th, 2024 =
 * Fix: Resolved an issue where the company ID was not being sent to 360MatchPro
