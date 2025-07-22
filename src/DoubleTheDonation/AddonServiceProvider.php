@@ -2,6 +2,7 @@
 
 namespace GiveDoubleTheDonation\DoubleTheDonation;
 
+use Give\Donations\Models\Donation;
 use Give\Helpers\Hooks;
 use Give\ServiceProviders\ServiceProvider;
 use GiveDoubleTheDonation\Addon\Activation;
@@ -9,6 +10,7 @@ use GiveDoubleTheDonation\Addon\ActivationBanner;
 use GiveDoubleTheDonation\Addon\Language;
 use GiveDoubleTheDonation\Addon\License;
 use GiveDoubleTheDonation\DoubleTheDonation\Actions\CheckCredentials;
+use GiveDoubleTheDonation\DoubleTheDonation\API\REST\CompanyMatching;
 use GiveDoubleTheDonation\DoubleTheDonation\Helpers\SettingsPage as SettingsPageRegister;
 
 /**
@@ -37,11 +39,19 @@ class AddonServiceProvider implements ServiceProvider
         Hooks::addAction('init', Language::class, 'load');
         Hooks::addAction('give_donation_form_after_email', DonationForm::class, 'employerMatchField');
 
-        // handle v2 forms stuff
-        if (isset($_POST) && ! isset($_POST['dtd'])) {
-            Hooks::addAction('give_insert_payment', Payment::class, 'addPaymentMeta', 10, 2);
-            Hooks::addAction('give_insert_payment', Payment::class, 'addDonationToDTD', 11, 2);
-        }
+        add_action('give_insert_payment', function($payment_id, $payment_data) {
+            // handle for v2 forms (v3 forms uses field scope)
+            if (isset($_POST) && !isset($_POST['dtd'])) {
+                give(Payment::class)->addPaymentMeta($payment_id, $payment_data);
+
+                $donation = Donation::find((int)$payment_id);
+
+                // handle for single donations only
+                if ($donation->type->isSingle()) {
+                    give(Payment::class)->addDonationToDTD($payment_id, $payment_data);
+                }
+            }
+        });
 
         /**
          * @unreleased add support for recurring donations
@@ -93,7 +103,11 @@ class AddonServiceProvider implements ServiceProvider
      */
     private function loadFrontend()
     {
+        // @unreleased
+        Hooks::addAction('rest_api_init', CompanyMatching::class);
+
         // Load front-end assets.
         Hooks::addAction('wp_enqueue_scripts', Assets::class, 'loadFrontendAssets');
+        Hooks::addAction('givewp_donation_confirmation_receipt_showing', Assets::class, 'loadReceiptScripts');
     }
 }
