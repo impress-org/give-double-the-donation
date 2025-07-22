@@ -95,6 +95,6 @@ class CompanyMatching
             return false;
         }
 
-        return $donation->id === $donationId;
+        return $donation->id == $donationId;
     }
 }
