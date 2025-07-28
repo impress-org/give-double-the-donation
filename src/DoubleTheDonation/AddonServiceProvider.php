@@ -51,7 +51,7 @@ class AddonServiceProvider implements ServiceProvider
                     give(Payment::class)->addDonationToDTD($payment_id, $payment_data);
                 }
             }
-        });
+        }, 10, 2);
 
         /**
          * @since 2.1.0 add support for recurring donations
