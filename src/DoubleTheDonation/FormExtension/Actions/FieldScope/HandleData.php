@@ -23,31 +23,25 @@ class HandleData
     {
         // Scope callback
         return function (DoubleTheDonationField $field, $company, Donation $donation) {
-            if ($this->isRequiredDataSet($company)) {
-                $this->save($company, $donation);
-                $this->send($company, $donation);
+            if (defined('WP_DEBUG') && WP_DEBUG) {
+                Log::info(
+                    'Double the Donation: Processing company matching data for donation',
+                    [
+                        'category' => 'Payment',
+                        'source' => 'Double the Donation add-on',
+                        'donation_id' => $donation->id,
+                        'donation_identifier' => $donation->getSequentialId(),
+                        'company_data' => is_array($company) ? [
+                            'company_id' => $company['company_id'] ?? null,
+                            'company_name' => $company['company_name'] ?? null,
+                        ] : null,
+                    ]
+                );
             }
+
+            $this->save((array)$company, $donation);
+            $this->send((array)$company, $donation);
         };
-    }
-
-    /**
-     * Check if company required data is set
-     *
-     * @since 2.0.0
-     */
-    private function isRequiredDataSet($data): bool
-    {
-        if ( ! is_array($data)) {
-            return false;
-        }
-
-        foreach (['company_id', 'company_name', 'entered_text'] as $name) {
-            if ( ! array_key_exists($name, $data)) {
-                return false;
-            }
-        }
-
-        return true;
     }
 
     /**
@@ -58,7 +52,7 @@ class HandleData
      */
     public function save(array $companyData, Donation $donation)
     {
-        foreach ($companyData as $name => $value) {
+        foreach ((array)$companyData as $name => $value) {
             give_update_meta(
                 $donation->id,
                 'doublethedonation_' . $name,
@@ -66,17 +60,19 @@ class HandleData
             );
         }
 
-        give_update_meta(
-            $donation->id,
-            '_give_donation_company',
-            $companyData['company_name']
-        );
+        if (isset($companyData['company_name'])) {
+            give_update_meta(
+                $donation->id,
+                '_give_donation_company',
+                $companyData['company_name']
+            );
 
-        give()->donor_meta->update_meta(
-            $donation->donorId,
-            '_give_donor_company',
-            $companyData['company_name']
-        );
+            give()->donor_meta->update_meta(
+                $donation->donorId,
+                '_give_donor_company',
+                $companyData['company_name']
+            );
+        }
     }
 
     /**
