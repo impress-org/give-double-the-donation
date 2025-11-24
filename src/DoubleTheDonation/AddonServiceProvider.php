@@ -2,7 +2,6 @@
 
 namespace GiveDoubleTheDonation\DoubleTheDonation;
 
-use Give\Donations\Models\Donation;
 use Give\Helpers\Hooks;
 use Give\ServiceProviders\ServiceProvider;
 use GiveDoubleTheDonation\Addon\Activation;
@@ -10,6 +9,7 @@ use GiveDoubleTheDonation\Addon\ActivationBanner;
 use GiveDoubleTheDonation\Addon\Language;
 use GiveDoubleTheDonation\Addon\License;
 use GiveDoubleTheDonation\DoubleTheDonation\Actions\CheckCredentials;
+use GiveDoubleTheDonation\DoubleTheDonation\Actions\RegisterDonationOnDTD;
 use GiveDoubleTheDonation\DoubleTheDonation\API\REST\CompanyMatching;
 use GiveDoubleTheDonation\DoubleTheDonation\Helpers\SettingsPage as SettingsPageRegister;
 
@@ -37,21 +37,9 @@ class AddonServiceProvider implements ServiceProvider
     {
         // Load add-on translations.
         Hooks::addAction('init', Language::class, 'load');
+
         Hooks::addAction('give_donation_form_after_email', DonationForm::class, 'employerMatchField');
-
-        add_action('give_insert_payment', function($payment_id, $payment_data) {
-            // handle for v2 forms (v3 forms uses field scope)
-            if (isset($_POST) && !isset($_POST['dtd'])) {
-                give(Payment::class)->addPaymentMeta($payment_id, $payment_data);
-
-                $donation = Donation::find((int)$payment_id);
-
-                // handle for single donations only
-                if ($donation->type->isSingle()) {
-                    give(Payment::class)->addDonationToDTD($payment_id, $payment_data);
-                }
-            }
-        }, 10, 2);
+        Hooks::addAction('give_insert_payment', RegisterDonationOnDTD::class, '__invoke', 10, 2);
 
         /**
          * @since 2.1.0 add support for recurring donations
