@@ -30,7 +30,7 @@ class HandleData
                         'category' => 'Payment',
                         'source' => 'Double the Donation add-on',
                         'donation_id' => $donation->id,
-                        'donation_identifier' => $donation->getSequentialId(),
+                        'donation_identifier' => $donation->getSequentialId() ?? $donation->id,
                         'company_data' => is_array($company) ? [
                             'company_id' => $company['company_id'] ?? null,
                             'company_name' => $company['company_name'] ?? null,
@@ -105,7 +105,7 @@ class HandleData
             'donor_email' => $donation->email,
             'campaign' => $donation->formId,
             'donation_amount' => $donation->amount->formatToDecimal(),
-            'donation_identifier' => $donation->getSequentialId(),
+            'donation_identifier' => $donation->getSequentialId() ?? $donation->id,
             'partner_identifier' => 'GiveWP',
         ];
 
@@ -124,7 +124,7 @@ class HandleData
                     'category' => 'Payment',
                     'source' => 'Double the Donation add-on',
                     'donation_id' => $donation->id,
-                    'donation_identifier' => $donation->getSequentialId(),
+                    'donation_identifier' => $donation->getSequentialId() ?? $donation->id,
                     'company_id' => $companyData['company_id'],
                     'company_name' => $companyData['company_name'],
                 ]
@@ -157,7 +157,7 @@ class HandleData
                     'category' => 'Payment',
                     'source' => 'Double the Donation add-on',
                     'donation_id' => $donation->id,
-                    'donation_identifier' => $donation->getSequentialId(),
+                    'donation_identifier' => $donation->getSequentialId() ?? $donation->id,
                     'response_code' => $responseCode,
                     'response_message' => $responseMessage,
                     'response_headers' => $responseHeadersArray,
@@ -179,7 +179,7 @@ class HandleData
                     'category' => 'Payment',
                     'source' => 'Double the Donation add-on',
                     'donation_id' => $donation->id,
-                    'donation_identifier' => $donation->getSequentialId(),
+                    'donation_identifier' => $donation->getSequentialId() ?? $donation->id,
                     'response_code' => $responseCode,
                     'response_message' => $responseMessage,
                     'response_headers' => $responseHeadersArray,
@@ -203,7 +203,7 @@ class HandleData
                     'category' => 'Payment',
                     'source' => 'Double the Donation add-on',
                     'donation_id' => $donation->id,
-                    'donation_identifier' => $donation->getSequentialId(),
+                    'donation_identifier' => $donation->getSequentialId() ?? $donation->id,
                     'response_code' => $responseCode,
                     'response_message' => $responseMessage,
                     'response_headers' => $responseHeadersArray,
