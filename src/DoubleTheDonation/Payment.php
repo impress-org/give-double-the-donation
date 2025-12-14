@@ -81,6 +81,7 @@ class Payment {
 			'campaign'               => $paymentMeta['form_id'],
 			'donation_amount'        => give_donation_amount( $payment_id ),
 			'donation_identifier'    => $donationIdentifier,
+			'recurring'              => $payment_data->is_recurring(),
 			'partner_identifier'     => 'GiveWP',
 		];
 
@@ -104,6 +105,7 @@ class Payment {
 					'donation_identifier' => $donationIdentifier,
 					'company_id'         => $companyID,
 					'company_name'       => isset( $paymentMeta['doublethedonation_company_name'] ) ? $paymentMeta['doublethedonation_company_name'] : null,
+                    'data'               => $data_360,
 				]
 			);
 		}

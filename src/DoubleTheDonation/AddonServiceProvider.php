@@ -10,6 +10,7 @@ use GiveDoubleTheDonation\Addon\Language;
 use GiveDoubleTheDonation\Addon\License;
 use GiveDoubleTheDonation\DoubleTheDonation\Actions\CheckCredentials;
 use GiveDoubleTheDonation\DoubleTheDonation\Actions\RegisterDonationOnDTD;
+use GiveDoubleTheDonation\DoubleTheDonation\Actions\RegisterRecurringDonationOnDTD;
 use GiveDoubleTheDonation\DoubleTheDonation\API\REST\CompanyMatching;
 use GiveDoubleTheDonation\DoubleTheDonation\Helpers\SettingsPage as SettingsPageRegister;
 
@@ -40,11 +41,7 @@ class AddonServiceProvider implements ServiceProvider
 
         Hooks::addAction('give_donation_form_after_email', DonationForm::class, 'employerMatchField');
         Hooks::addAction('give_insert_payment', RegisterDonationOnDTD::class, '__invoke', 10, 2);
-
-        /**
-         * @since 2.1.0 add support for recurring donations
-         */
-        Hooks::addAction('give_recurring_record_payment', Payment::class, 'addDonationToDTD', 10, 2);
+        Hooks::addAction('give_recurring_record_payment', RegisterRecurringDonationOnDTD::class);
 
         // Show Receipt info
         Hooks::addAction('give_payment_receipt_after', UpdateDonationReceipt::class, 'renderLegacyRow', 10, 2);

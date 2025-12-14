@@ -106,6 +106,7 @@ class HandleData
             'campaign' => $donation->formId,
             'donation_amount' => $donation->amount->formatToDecimal(),
             'donation_identifier' => $donation->getSequentialId() ?? $donation->id,
+            'recurring' => $donation->type->isRecurring(),
             'partner_identifier' => 'GiveWP',
         ];
 
@@ -127,6 +128,7 @@ class HandleData
                     'donation_identifier' => $donation->getSequentialId() ?? $donation->id,
                     'company_id' => $companyData['company_id'],
                     'company_name' => $companyData['company_name'],
+                    'data' => $data,
                 ]
             );
         }
