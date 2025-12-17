@@ -2,6 +2,7 @@
 
 namespace GiveDoubleTheDonation\DoubleTheDonation;
 
+use Give\Donations\ValueObjects\DonationMetaKeys;
 use Give\Log\Log;
 
 class Payment {
@@ -81,7 +82,7 @@ class Payment {
 			'campaign'               => $paymentMeta['form_id'],
 			'donation_amount'        => give_donation_amount( $payment_id ),
 			'donation_identifier'    => $donationIdentifier,
-			'recurring'              => $payment_data->is_recurring(),
+			'recurring'              => (bool)$paymentMeta[DonationMetaKeys::IS_RECURRING],
 			'partner_identifier'     => 'GiveWP',
 		];
 
