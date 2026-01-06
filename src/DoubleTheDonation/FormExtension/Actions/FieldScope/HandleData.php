@@ -78,6 +78,7 @@ class HandleData
     /**
      * Send data to DTD 360match pro
      *
+     * @unreleased add logging
      * @since 2.1.0 update visibility
      * @since 2.0.2
      */
@@ -118,20 +119,18 @@ class HandleData
             $data['doublethedonation_entered_text'] = $companyData['entered_text'];
         }
 
-        if (defined('WP_DEBUG') && WP_DEBUG) {
-            Log::info(
-                'Double the Donation: Sending donation data to 360MatchPro API',
-                [
-                    'category' => 'Payment',
-                    'source' => 'Double the Donation add-on',
-                    'donation_id' => $donation->id,
-                    'donation_identifier' => $donation->getSequentialId() ?? $donation->id,
-                    'company_id' => $companyData['company_id'],
-                    'company_name' => $companyData['company_name'],
-                    'data' => $data,
-                ]
-            );
-        }
+        Log::info(
+            'Double the Donation: Sending donation data to 360MatchPro API',
+            [
+                'category' => 'Payment',
+                'source' => 'Double the Donation add-on',
+                'donation_id' => $donation->id,
+                'donation_identifier' => $donation->getSequentialId() ?? $donation->id,
+                'company_id' => $companyData['company_id'],
+                'company_name' => $companyData['company_name'],
+                'data' => $data,
+            ]
+        );
 
         $response = wp_remote_post('https://doublethedonation.com/api/360matchpro/v1/register_donation',
             [
@@ -152,26 +151,24 @@ class HandleData
         $responseHeadersArray = (is_wp_error($response) || ! $responseHeaders || ! method_exists($responseHeaders, 'getAll')) ? [] : $responseHeaders->getAll();
 
         // Log the raw response from the server
-        if (defined('WP_DEBUG') && WP_DEBUG) {
-            Log::http(
-                'Double the Donation: Received response from 360MatchPro API',
-                [
-                    'category' => 'Payment',
-                    'source' => 'Double the Donation add-on',
-                    'donation_id' => $donation->id,
-                    'donation_identifier' => $donation->getSequentialId() ?? $donation->id,
-                    'response_code' => $responseCode,
-                    'response_message' => $responseMessage,
-                    'response_headers' => $responseHeadersArray,
-                    'response_body' => $responseBody,
-                    'raw_response' => is_wp_error($response) ? [
-                        'error_code' => $response->get_error_code(),
-                        'error_message' => $response->get_error_message(),
-                        'error_data' => $response->get_error_data(),
-                    ] : $response,
-                ]
-            );
-        }
+        Log::http(
+            'Double the Donation: Received response from 360MatchPro API',
+            [
+                'category' => 'Payment',
+                'source' => 'Double the Donation add-on',
+                'donation_id' => $donation->id,
+                'donation_identifier' => $donation->getSequentialId() ?? $donation->id,
+                'response_code' => $responseCode,
+                'response_message' => $responseMessage,
+                'response_headers' => $responseHeadersArray,
+                'response_body' => $responseBody,
+                'raw_response' => is_wp_error($response) ? [
+                    'error_code' => $response->get_error_code(),
+                    'error_message' => $response->get_error_message(),
+                    'error_data' => $response->get_error_data(),
+                ] : $response,
+            ]
+        );
 
         // API fail check.
         if (201 !== $responseCode) {
@@ -198,23 +195,21 @@ class HandleData
             return;
         }
 
-        if (defined('WP_DEBUG') && WP_DEBUG) {
-            Log::success(
-                'Double the Donation: Successfully registered donation with 360MatchPro API',
-                [
-                    'category' => 'Payment',
-                    'source' => 'Double the Donation add-on',
-                    'donation_id' => $donation->id,
-                    'donation_identifier' => $donation->getSequentialId() ?? $donation->id,
-                    'response_code' => $responseCode,
-                    'response_message' => $responseMessage,
-                    'response_headers' => $responseHeadersArray,
-                    'response_body' => $responseBody,
-                    'company_id' => $companyData['company_id'],
-                    'company_name' => $companyData['company_name'],
-                ]
-            );
-        }
+        Log::success(
+            'Double the Donation: Successfully registered donation with 360MatchPro API',
+            [
+                'category' => 'Payment',
+                'source' => 'Double the Donation add-on',
+                'donation_id' => $donation->id,
+                'donation_identifier' => $donation->getSequentialId() ?? $donation->id,
+                'response_code' => $responseCode,
+                'response_message' => $responseMessage,
+                'response_headers' => $responseHeadersArray,
+                'response_body' => $responseBody,
+                'company_id' => $companyData['company_id'],
+                'company_name' => $companyData['company_name'],
+            ]
+        );
 
         DonationNote::create([
             'donationId' => $donation->id,
