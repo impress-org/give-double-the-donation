@@ -70,7 +70,7 @@ Your company will get an email and you will as well with next steps to follow. I
 
 == Changelog ==
 
-= 2.1.2: January 8th, 2026 =
+= 2.1.2: January 7th, 2026 =
 * Fix: Resolved issues with inconsistent donation amounts and missing donation records
 
 
