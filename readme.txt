@@ -5,7 +5,7 @@ Tags: givewp, double the donation, employer matching, company matching donation,
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.2
-Stable tag: 2.1.1
+Stable tag: 2.1.2
 Requires Give: 3.8.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -69,6 +69,10 @@ Your company will get an email and you will as well with next steps to follow. I
 3. Each form can be enabled/disabled and the company matching field label customized for your needs.
 
 == Changelog ==
+
+= 2.1.2: January 8th, 2026 =
+* Fix: Resolved issues with inconsistent donation amounts and missing donation records
+
 
 = 2.1.1: July 28th, 2025 =
 * Fix: Resolved an issue that was preventing the donation form to submit

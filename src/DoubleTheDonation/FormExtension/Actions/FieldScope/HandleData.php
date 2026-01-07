@@ -23,21 +23,19 @@ class HandleData
     {
         // Scope callback
         return function (DoubleTheDonationField $field, $company, Donation $donation) {
-            if (defined('WP_DEBUG') && WP_DEBUG) {
-                Log::info(
-                    'Double the Donation: Processing company matching data for donation',
-                    [
-                        'category' => 'Payment',
-                        'source' => 'Double the Donation add-on',
-                        'donation_id' => $donation->id,
-                        'donation_identifier' => $donation->getSequentialId() ?? $donation->id,
-                        'company_data' => is_array($company) ? [
-                            'company_id' => $company['company_id'] ?? null,
-                            'company_name' => $company['company_name'] ?? null,
-                        ] : null,
-                    ]
-                );
-            }
+            Log::info(
+                'Double the Donation: Processing company matching data for donation',
+                [
+                    'category' => 'Payment',
+                    'source' => 'Double the Donation add-on',
+                    'donation_id' => $donation->id,
+                    'donation_identifier' => $donation->getSequentialId() ?? $donation->id,
+                    'company_data' => is_array($company) ? [
+                        'company_id' => $company['company_id'] ?? null,
+                        'company_name' => $company['company_name'] ?? null,
+                    ] : null,
+                ]
+            );
 
             $this->save((array)$company, $donation);
             $this->send((array)$company, $donation);
@@ -78,23 +76,21 @@ class HandleData
     /**
      * Send data to DTD 360match pro
      *
-     * @unreleased add logging
+     * @since 2.1.2 add logging
      * @since 2.1.0 update visibility
      * @since 2.0.2
      */
     public function send(array $companyData = [], Donation $donation): void
     {
         if ( ! $dtdPublicKey = give_get_option('public_dtd_key')) {
-            if (defined('WP_DEBUG') && WP_DEBUG) {
-                Log::warning(
-                    'Double the Donation: Public key not configured. Skipping API call.',
-                    [
-                        'category' => 'Payment',
-                        'source' => 'Double the Donation add-on',
-                        'donation_id' => $donation->id,
-                    ]
-                );
-            }
+            Log::warning(
+                'Double the Donation: Public key not configured. Skipping API call.',
+                [
+                    'category' => 'Payment',
+                    'source' => 'Double the Donation add-on',
+                    'donation_id' => $donation->id,
+                ]
+            );
 
             return;
         }

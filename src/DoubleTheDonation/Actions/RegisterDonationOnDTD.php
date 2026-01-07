@@ -8,13 +8,13 @@ use Give\Log\Log;
 use GiveDoubleTheDonation\DoubleTheDonation\Payment;
 
 /**
- * @unreleased
+ * @since 2.1.2
  */
 class RegisterDonationOnDTD {
     /**
      * Called on give_insert_payment action.
      *
-     * @unreleased
+     * @since 2.1.2
      */
     public function __invoke($payment_id, $payment_data) {
         // V3 forms are handled by the field scope

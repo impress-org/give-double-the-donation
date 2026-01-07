@@ -48,7 +48,7 @@ class Payment {
 	/**
 	 * Adds the donation to DTD.
      *
-     * @unreleased add logging
+     * @since 2.1.2 add logging
      * @since 1.0.0
 	 *
 	 * @param $payment_id
@@ -60,16 +60,14 @@ class Payment {
 		// API Key check
 		$dtdPublicKey = give_get_option( 'public_dtd_key', false );
 		if ( ! $dtdPublicKey ) {
-			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-				Log::warning(
-					'Double the Donation: Public key not configured. Skipping API call.',
-					[
-						'category' => 'Payment',
-						'source'   => 'Double the Donation add-on',
-						'payment_id' => $payment_id,
-					]
-				);
-			}
+            Log::warning(
+                'Double the Donation: Public key not configured. Skipping API call.',
+                [
+                    'category' => 'Payment',
+                    'source'   => 'Double the Donation add-on',
+                    'payment_id' => $payment_id,
+                ]
+            );
 
 			return false;
 		}
